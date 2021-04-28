@@ -1,7 +1,46 @@
 .App {
   text-align: center;
+
+  /* Center and scale the image nicely */
+  /* background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+}
+input.transparent-input {
+  background-color: transparent !important;
+  border: none !important;
 }
 
+.border {
+  border: solid white 4px;
+  border-radius: 10px;
+  color: white;
+  padding: 5px;
+}
+
+.btn-col {
+  color: white;
+  border-radius: 25px;
+  background-color: tomato;
+  padding: 5px 60px;
+  font-size: large;
+}
+.wolor {
+  color: white;
+  text-decoration: none;
+}
+
+input::placeholder {
+  color: white;
+}
+
+/* ::placeholder {
+  color: white;
+} */
+.bgimage {
+  background-image: url('images/prize-bg-image.png');
+  height: 100%;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
