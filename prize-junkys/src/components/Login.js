@@ -1,9 +1,31 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-function Login() {
+function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
+  const handleLogin = async () => {
+    setError(null);
+    let item = { email, password };
+    console.log(item);
+    await axios
+      .post('http://80.211.233.121/prize_junkys/api/auth/login', {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        console.log('response>>>', response);
+        console.log('message>>>', response.data.message);
+        if (response.data.message === 'User logged in successfully') {
+          localStorage.setItem('user-info', JSON.stringify(response.data));
+          props.history.push('/components/SweepStake');
+        } else {
+          setError(response.data.message);
+        }
+      });
+  };
   return (
     <div>
       <h1 className="wolor">Login</h1>
@@ -50,7 +72,11 @@ function Login() {
         />
       </div>
       <br />
-      <button className="btn-col">SIGN IN</button>
+      {error && <div className="error-msg-color">{error}</div>}
+      <br />
+      <button className="btn-col" onClick={handleLogin}>
+        SIGN IN
+      </button>
       <br />
       <br />
       <button className="btn-col">REGISTER</button>
@@ -64,3 +90,21 @@ function Login() {
 }
 
 export default Login;
+
+// body: JSON.stringify(item),
+// headers: {
+//   'Content-Type': 'application/json',
+//   "Accept: 'application/json',
+// },
+// email: email,
+// password: password,
+
+// result = await result.json();
+// localStorage.setItem(JSON.stringify(result));
+// props.history.push('/components/SweepStake');
+//   .then((response) => {
+//     props.history.push('/components/SweepStake');
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
