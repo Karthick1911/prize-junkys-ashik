@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Login(props) {
@@ -25,6 +26,10 @@ function Login(props) {
           setError(response.data.message);
         }
       });
+  };
+
+  const handleResister = () => {
+    props.history.push('/components/Register');
   };
   return (
     <div>
@@ -79,7 +84,10 @@ function Login(props) {
       </button>
       <br />
       <br />
-      <button className="btn-col">REGISTER</button>
+
+      <button className="btn-col" onClick={handleResister}>
+        REGISTER
+      </button>
       <br />
       <br />
       <a className="wolor" href>

@@ -18,12 +18,18 @@ input.transparent-input {
   padding: 5px;
 }
 
+.fieldwidth {
+  width: 60%;
+  margin-left: 20%;
+}
 .btn-col {
   color: white;
   border-radius: 25px;
   background-color: tomato;
   padding: 5px 60px;
   font-size: large;
+  text-decoration: none;
+  width: 40%;
 }
 .wolor {
   color: white;
