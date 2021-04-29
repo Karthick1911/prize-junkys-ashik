@@ -9,8 +9,6 @@ function Login(props) {
 
   const handleLogin = async () => {
     setError(null);
-    let item = { email, password };
-    console.log(item);
     await axios
       .post('http://80.211.233.121/prize_junkys/api/auth/login', {
         email: email,
@@ -98,21 +96,3 @@ function Login(props) {
 }
 
 export default Login;
-
-// body: JSON.stringify(item),
-// headers: {
-//   'Content-Type': 'application/json',
-//   "Accept: 'application/json',
-// },
-// email: email,
-// password: password,
-
-// result = await result.json();
-// localStorage.setItem(JSON.stringify(result));
-// props.history.push('/components/SweepStake');
-//   .then((response) => {
-//     props.history.push('/components/SweepStake');
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
