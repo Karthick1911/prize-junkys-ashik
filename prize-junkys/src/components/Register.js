@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Reagister(props) {
+function Register(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -14,7 +14,7 @@ function Reagister(props) {
   };
   return (
     <div>
-      <h2>Register</h2>
+      <h2 className="wolor">Register</h2>
 
       <div class="form-outline fieldwidth">
         <input
@@ -100,4 +100,4 @@ function Reagister(props) {
   );
 }
 
-export default Reagister;
+export default Register;

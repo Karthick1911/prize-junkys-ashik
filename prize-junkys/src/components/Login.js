@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Login(props) {
@@ -90,9 +90,9 @@ function Login(props) {
       </button>
       <br />
       <br />
-      <a className="wolor" href>
-        Forgot Password
-      </a>
+      <Link to="/components/ForgotPassword">
+        <div className="wolor">Forgot Password</div>
+      </Link>
     </div>
   );
 }
