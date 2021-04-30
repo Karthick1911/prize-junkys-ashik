@@ -58,6 +58,12 @@ a:hover {
   float: right;
   padding: 5px;
 }
+
+.header-right-width {
+  float: right;
+  padding: 5px;
+  width: 10%;
+}
 .headersec {
   background-color: brown;
   color: white;
@@ -115,4 +121,8 @@ a:hover {
   to {
     transform: rotate(360deg);
   }
+}
+
+.inline {
+  display: inline;
 }
