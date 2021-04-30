@@ -9,6 +9,7 @@ function Login(props) {
 
   const handleLogin = async () => {
     setError(null);
+    console.log(email, password);
     await axios
       .post('http://80.211.233.121/prize_junkys/api/auth/login', {
         email: email,

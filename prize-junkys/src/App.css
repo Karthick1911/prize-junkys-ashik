@@ -1,14 +1,15 @@
 .App {
   text-align: center;
-
-  /* Center and scale the image nicely */
-  /* background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
 }
 input.transparent-input {
   background-color: transparent !important;
   border: none !important;
+}
+
+.transparent {
+  background-color: transparent !important;
+  border: none !important;
+  color: white;
 }
 
 .border {
@@ -37,14 +38,39 @@ a:hover {
   text-decoration: none;
   width: 40%;
 }
+
+.bordernone {
+  border: none;
+}
+
+.title {
+  font-size: 30px;
+}
+.searchbar {
+  border-radius: 30px;
+  width: 60%;
+  padding: 7px;
+  margin-bottom: 30px;
+  margin-left: 20%;
+  background-color: white;
+}
+.header-right {
+  float: right;
+  padding: 5px;
+}
+.headersec {
+  background-color: brown;
+  color: white;
+  overflow: hidden;
+}
 .wolor {
   color: white;
   text-decoration: none;
 }
 
-input::placeholder {
+/* input::placeholder {
   color: white;
-}
+} */
 
 .error-msg-color {
   color: white;
