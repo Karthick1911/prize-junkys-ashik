@@ -1,9 +1,22 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 //import MoreOption from './MoreOption';
 function SweepStake(props) {
+  const [items, setItems] = useState([{}]);
+
+  useEffect(() => {
+    axios
+      .get('http://80.211.233.121/prize_junkys/api/sweepstake/')
+      .then((response) => {
+        console.log('response>>', response);
+        setItems({ stakes: response.data });
+      });
+  }, []);
+
   const options = () => {
     props.history.push('/components/Profile');
   };
+
   return (
     <div>
       <div className="headersec">
@@ -60,6 +73,25 @@ function SweepStake(props) {
           />
         </div>
       </div>
+
+      <div className="middle">
+        <div className="productbg ">
+          <h2 className="image">image</h2>
+          <h4 className="">Description</h4>
+          <br />
+          <button className="view">view</button>
+        </div>
+      </div>
+      {items.map((item) => (
+        <div className="middle">
+          <div className="productbg ">
+            <h2 className="image">image</h2>
+            <h4 className="">Description</h4>
+            <br />
+            <button className="view">view</button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

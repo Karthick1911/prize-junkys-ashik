@@ -40,6 +40,34 @@ a:hover {
   font-size: 30px;
 }
 
+.image {
+  float: left;
+  width: 90px;
+  height: 90px;
+  border: solid 2px red;
+}
+
+.view {
+  background-color: tomato;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 10px;
+}
+.left {
+  float: left;
+}
+.productbg {
+  background-color: white;
+  margin: 20px 20px 20px 20px;
+  padding: 20px;
+  border-radius: 5px;
+  flex: auto;
+  width: 80%;
+}
+
+.middle {
+  margin-left: 250px;
+}
 .bordernone {
   border: none;
 }

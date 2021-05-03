@@ -19,6 +19,7 @@ function ForgotPassword(props) {
         if (response.data.message === 'We have emailed your password.') {
           localStorage.setItem('user-info', JSON.stringify(response.data));
           console.log('message>>>', response.data.message);
+          setEmail('');
           setMessage(response.data.message);
         } else {
           setError(response.data.errors.email);

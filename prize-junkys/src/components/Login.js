@@ -76,7 +76,11 @@ function Login(props) {
         />
       </div>
       <br />
-      {error && <div className="error-msg-color">{error}</div>}
+      {error && (
+        <div className="error-msg-color wolor">
+          <h3>{error + '*'}</h3>
+        </div>
+      )}
       <br />
       <button className="btn-col" onClick={handleLogin}>
         SIGN IN
