@@ -30,6 +30,10 @@ function Profile(props) {
         }
       });
   };
+
+  const handleChangePassword = () => {
+    props.history.push('/components/ChangePassword');
+  };
   return (
     <div>
       <div className="headersec">
@@ -116,7 +120,9 @@ function Profile(props) {
           SUBMIT
         </button>
         <br />
-        <button className="btn-col">CHANGE PASSWORD</button>
+        <button className="btn-col" onClick={handleChangePassword}>
+          CHANGE PASSWORD
+        </button>
       </div>
     </div>
   );

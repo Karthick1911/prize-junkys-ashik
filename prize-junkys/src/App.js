@@ -5,6 +5,7 @@ import ForgotPassword from './components/ForgotPassword';
 import Profile from './components/Profile';
 import ProfileMessage from './components/ProfileMessage';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import ChangePassword from './components/ChangePassword';
 import './App.css';
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
             <Route
               path="/components/ProfileMessage"
               component={ProfileMessage}
+            />
+            <Route
+              path="/components/ChangePassword"
+              component={ChangePassword}
             />
           </Switch>
         </div>
