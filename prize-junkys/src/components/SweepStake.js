@@ -1,16 +1,35 @@
+/* eslint-disable jsx-a11y/alt-text */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 //import MoreOption from './MoreOption';
 function SweepStake(props) {
-  const [items, setItems] = useState([{}]);
+  const [items, setItems] = useState({ data: [] });
+  //const [dataitems, setDataItems] = useState([]);
 
   useEffect(() => {
     axios
-      .get('http://80.211.233.121/prize_junkys/api/sweepstake/')
-      .then((response) => {
-        console.log('response>>', response);
-        setItems({ stakes: response.data });
+      .get('http://80.211.233.121/prize_junkys/api/sweepstake/', {})
+      .then((res) => {
+        let result = JSON.stringify(res.data.stakes);
+        let arrayResult = JSON.parse(result);
+        setItems({ data: arrayResult.data });
+        console.log(arrayResult.data);
+        console.log(typeof arrayResult.data);
+        //setItems(result);
+        //console.log(items);
       });
+    // .then((data) => {
+    //   console.log(typeof data);
+    //    setItems({ ...data });
+    // });
+    // .then((response) => {
+    //   response.json();
+    //   console.log('response>>', response);
+    //   console.log('data-response', typeof response.data.stakes.data);
+    // let result = response.data.stakes.data;
+    // result = result.json();
+    //setItems({ stakes: response.data.stakes.data });
+    // });
   }, []);
 
   const options = () => {
@@ -74,24 +93,21 @@ function SweepStake(props) {
         </div>
       </div>
 
-      <div className="middle">
-        <div className="productbg ">
-          <h2 className="image">image</h2>
-          <h4 className="">Description</h4>
-          <br />
-          <button className="view">view</button>
-        </div>
-      </div>
-      {items.map((item) => (
-        <div className="middle">
-          <div className="productbg ">
-            <h2 className="image">image</h2>
-            <h4 className="">Description</h4>
-            <br />
-            <button className="view">view</button>
+      {items.data.length &&
+        items.data.map((item) => (
+          <div className="middle">
+            <div className="productbg ">
+              <div key={item.id} className="image">
+                <img src={item.image} height="100" width="100" />
+              </div>
+              <h4 className="desc" key={item.id}>
+                {item.title}
+              </h4>
+              <br />
+              <button className="view">view</button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 }
