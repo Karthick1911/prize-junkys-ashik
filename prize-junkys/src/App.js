@@ -4,6 +4,7 @@ import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import Profile from './components/Profile';
 import ProfileMessage from './components/ProfileMessage';
+import SweepstakeDetails from './components/SweepstakeDetails';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ChangePassword from './components/ChangePassword';
 import './App.css';
@@ -29,6 +30,10 @@ function App() {
             <Route
               path="/components/ChangePassword"
               component={ChangePassword}
+            />
+            <Route
+              path="/components/SweepstakeDetails/:id"
+              component={SweepstakeDetails}
             />
           </Switch>
         </div>

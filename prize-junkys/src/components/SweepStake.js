@@ -4,8 +4,6 @@ import React, { useEffect, useState } from 'react';
 //import MoreOption from './MoreOption';
 function SweepStake(props) {
   const [items, setItems] = useState({ data: [] });
-  //const [dataitems, setDataItems] = useState([]);
-
   useEffect(() => {
     axios
       .get('http://80.211.233.121/prize_junkys/api/sweepstake/', {})
@@ -15,25 +13,19 @@ function SweepStake(props) {
         setItems({ data: arrayResult.data });
         console.log(arrayResult.data);
         console.log(typeof arrayResult.data);
-        //setItems(result);
-        //console.log(items);
       });
-    // .then((data) => {
-    //   console.log(typeof data);
-    //    setItems({ ...data });
-    // });
-    // .then((response) => {
-    //   response.json();
-    //   console.log('response>>', response);
-    //   console.log('data-response', typeof response.data.stakes.data);
-    // let result = response.data.stakes.data;
-    // result = result.json();
-    //setItems({ stakes: response.data.stakes.data });
-    // });
   }, []);
 
   const options = () => {
     props.history.push('/components/Profile');
+  };
+
+  const handleView = (key) => {
+    const link = '/components/SweepstakeDetails/' + key;
+    console.log(link);
+    props.history.push(link);
+    // setKey(key);
+    // setActivePage('page2');
   };
 
   return (
@@ -92,22 +84,35 @@ function SweepStake(props) {
           />
         </div>
       </div>
-
-      {items.data.length &&
-        items.data.map((item) => (
-          <div className="middle">
-            <div className="productbg ">
-              <div key={item.id} className="image">
-                <img src={item.image} height="100" width="100" />
+      <div>
+        <div>
+          {items.data.length &&
+            items.data.map((item) => (
+              <div className="middle">
+                <div className="productbg ">
+                  <div key={item.id} className="image">
+                    <img src={item.image} height="100" width="100" />
+                  </div>
+                  <h4 className="desc" key={item.id}>
+                    {item.title}
+                  </h4>
+                  <br />
+                  <button
+                    key={item.id}
+                    className="view"
+                    onClick={() => {
+                      handleView(item.id);
+                    }}
+                  >
+                    view
+                  </button>
+                </div>
               </div>
-              <h4 className="desc" key={item.id}>
-                {item.title}
-              </h4>
-              <br />
-              <button className="view">view</button>
-            </div>
-          </div>
-        ))}
+            ))}
+        </div>
+      </div>
+
+      {/* <div>{activePage === 'page2' && <SweepstakeDetails key={key} />}</div> */}
     </div>
   );
 }

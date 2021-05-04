@@ -65,6 +65,9 @@ a:hover {
   width: 50%;
 }
 
+.redcolor {
+  color: red;
+}
 .desc {
   float: inline-start;
 }
