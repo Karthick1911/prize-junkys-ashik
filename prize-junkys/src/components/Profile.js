@@ -23,7 +23,7 @@ function Profile(props) {
         if (response.data.message === 'Contact Admin') {
           console.log(response.data.message);
           localStorage.setItem('user-info', JSON.stringify(response.data));
-          props.history.push('/components/ProfileMessage');
+          props.history.push('/ProfileMessage');
         } else {
           console.log(response.data.message);
           setError(response.data.message);
@@ -32,20 +32,20 @@ function Profile(props) {
   };
 
   const handleChangePassword = () => {
-    props.history.push('/components/ChangePassword');
+    props.history.push('/ChangePassword');
   };
 
   const changeOption = (changeParam) => {
     console.log(changeParam);
     switch (changeParam) {
       case 'MySweepstake':
-        props.history.push('/components/MySweepstake');
+        props.history.push('/MySweepstake');
         break;
       case 'MyProfile':
-        props.history.push('/components/Profile');
+        props.history.push('/Profile');
         break;
       case 'Logout':
-        props.history.push('/components/Logout');
+        props.history.push('/Logout');
         break;
       default:
         break;

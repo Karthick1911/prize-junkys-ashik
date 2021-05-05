@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import MoreOption from './MoreOption';
-//import { set } from 'react-hook-form';
 
 function SweepstakeDetails(props) {
   const [data, setData] = useState({});
@@ -12,7 +11,7 @@ function SweepstakeDetails(props) {
   let { id } = useParams();
   console.log(id);
   const user =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vODAuMjExLjIzMy4xMjEvcHJpemVfanVua3lzL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjIwMjA4ODAzLCJleHAiOjE2MjAyMTI0MDMsIm5iZiI6MTYyMDIwODgwMywianRpIjoiRktFRGxKbWw4ZEtXcVlBZCIsInN1YiI6MTAxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.smdaOcjUaHG0zLsimojhrrcnz-ZyFKK_Ue2XQMvaVQc';
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vODAuMjExLjIzMy4xMjEvcHJpemVfanVua3lzL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjIwMjIyNzUwLCJleHAiOjE2MjAyMjYzNTAsIm5iZiI6MTYyMDIyMjc1MCwianRpIjoiMzlvSk9Va2x3MFozenFnMCIsInN1YiI6MTAxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.09N-qP-8YvqcRCvfOdV5IT6W5biBZV5uP9S30zvLTHo';
   useEffect(() => {
     axios
       .get('http://80.211.233.121/prize_junkys/api/sweepstake/details/' + id, {
@@ -44,13 +43,13 @@ function SweepstakeDetails(props) {
   const changeOption = (changeParam) => {
     switch (changeParam) {
       case 'MySweepstake':
-        props.history.push('/components/MySweepstake');
+        props.history.push('/MySweepstake');
         break;
       case 'MyProfile':
-        props.history.push('/components/Profile');
+        props.history.push('/Profile');
         break;
       case 'Logout':
-        props.history.push('/components/Logout');
+        props.history.push('/Logout');
         break;
       default:
         break;

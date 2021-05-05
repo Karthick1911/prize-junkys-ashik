@@ -6,7 +6,7 @@ import MoreOption from './MoreOption';
 function MySweepstake(props) {
   const [items, setItems] = useState({ data: [] });
   const user =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vODAuMjExLjIzMy4xMjEvcHJpemVfanVua3lzL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjIwMjA4ODAzLCJleHAiOjE2MjAyMTI0MDMsIm5iZiI6MTYyMDIwODgwMywianRpIjoiRktFRGxKbWw4ZEtXcVlBZCIsInN1YiI6MTAxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.smdaOcjUaHG0zLsimojhrrcnz-ZyFKK_Ue2XQMvaVQc';
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vODAuMjExLjIzMy4xMjEvcHJpemVfanVua3lzL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjIwMjIyNzUwLCJleHAiOjE2MjAyMjYzNTAsIm5iZiI6MTYyMDIyMjc1MCwianRpIjoiMzlvSk9Va2x3MFozenFnMCIsInN1YiI6MTAxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.09N-qP-8YvqcRCvfOdV5IT6W5biBZV5uP9S30zvLTHo';
   useEffect(() => {
     axios
       .get('http://80.211.233.121/prize_junkys/api/subscription', {
@@ -28,13 +28,13 @@ function MySweepstake(props) {
     console.log(changeParam);
     switch (changeParam) {
       case 'MySweepstake':
-        props.history.push('/components/MySweepstake');
+        props.history.push('/MySweepstake');
         break;
       case 'MyProfile':
-        props.history.push('/components/Profile');
+        props.history.push('/Profile');
         break;
       case 'Logout':
-        props.history.push('/components/Logout');
+        props.history.push('/Logout');
         break;
       default:
         break;
@@ -62,15 +62,6 @@ function MySweepstake(props) {
                     {item.title}
                   </h4>
                   <br />
-                  <button
-                    key={item.id}
-                    className="view"
-                    //   onClick={() => {
-                    //     handleView(item.id);
-                    //   }}
-                  >
-                    view
-                  </button>
                 </div>
               </div>
             ))}

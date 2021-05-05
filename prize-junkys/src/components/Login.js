@@ -20,7 +20,7 @@ function Login(props) {
         console.log('message>>>', response.data.message);
         if (response.data.message === 'User logged in successfully') {
           localStorage.setItem('user-info', JSON.stringify(response.data));
-          props.history.push('/components/SweepStake');
+          props.history.push('/SweepStake');
         } else {
           setError(response.data.message);
         }
@@ -28,7 +28,7 @@ function Login(props) {
   };
 
   const handleResister = () => {
-    props.history.push('/components/Register');
+    props.history.push('/Register');
   };
   return (
     <div>
@@ -93,8 +93,8 @@ function Login(props) {
       </button>
       <br />
       <br />
-      <Link to="/components/ForgotPassword">
-        <div className="wolor">Forgot Password</div>
+      <Link className="wolor" to="/ForgotPassword">
+        <div>Forgot Password?</div>
       </Link>
     </div>
   );

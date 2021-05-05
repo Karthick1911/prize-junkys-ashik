@@ -6,6 +6,7 @@ import Profile from './components/Profile';
 import ProfileMessage from './components/ProfileMessage';
 import SweepstakeDetails from './components/SweepstakeDetails';
 import MySweepstake from './components/MySweepstake';
+import Logout from './components/Logout';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ChangePassword from './components/ChangePassword';
 import './App.css';
@@ -17,26 +18,18 @@ function App() {
         <div>
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route path="/components/SweepStake" component={SweepStake} />
-            <Route path="/components/Register" component={Register} />
-            <Route path="/components/Profile" component={Profile} />
+            <Route path="/SweepStake" component={SweepStake} />
+            <Route path="/Register" component={Register} />
+            <Route path="/Profile" component={Profile} />
+            <Route path="/ForgotPassword" component={ForgotPassword} />
+            <Route path="/ProfileMessage" component={ProfileMessage} />
+            <Route path="/ChangePassword" component={ChangePassword} />
             <Route
-              path="/components/ForgotPassword"
-              component={ForgotPassword}
-            />
-            <Route
-              path="/components/ProfileMessage"
-              component={ProfileMessage}
-            />
-            <Route
-              path="/components/ChangePassword"
-              component={ChangePassword}
-            />
-            <Route
-              path="/components/SweepstakeDetails/:id"
+              path="/SweepstakeDetails/:id"
               component={SweepstakeDetails}
             />
-            <Route path="/components/MySweepstake" component={MySweepstake} />
+            <Route path="/MySweepstake" component={MySweepstake} />
+            <Route path="/Logout" component={Logout} />
           </Switch>
         </div>
       </BrowserRouter>

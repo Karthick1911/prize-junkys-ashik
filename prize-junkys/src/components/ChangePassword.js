@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import MoreOption from './MoreOption';
 function ChangePassword(props) {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  //   const {
-  //     register,
-  //     formState: { errors },
-  //     handleSubmit,
-  //   } = useForm();
 
   const {
     register,
@@ -32,7 +28,7 @@ function ChangePassword(props) {
         } else if (response.data.message === 'Contact Admin') {
           console.log(response.data.message);
           localStorage.setItem('user-info', JSON.stringify(response.data));
-          props.history.push('/components/ProfileMessage');
+          props.history.push('/ProfileMessage');
         } else {
           console.log(response.data.message);
           setError(response.data.message);
@@ -40,13 +36,30 @@ function ChangePassword(props) {
       });
   };
 
+  const changeOption = (changeParam) => {
+    switch (changeParam) {
+      case 'MySweepstake':
+        props.history.push('/MySweepstake');
+        break;
+      case 'MyProfile':
+        props.history.push('/Profile');
+        break;
+      case 'Logout':
+        props.history.push('/Logout');
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div>
-      <div className="headersec">
-        <h3>Change Password</h3>
-        <br />
+      <div>
+        <span className="wolor ">Change Password</span>
+        <MoreOption onClick={changeOption} />
       </div>
-
+      <br />
+      <br />
       <div>
         <h2 className="wolor">Prize junkys</h2>
         <h2 className="wolor">Change Password?</h2>
