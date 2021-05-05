@@ -5,6 +5,7 @@ import ForgotPassword from './components/ForgotPassword';
 import Profile from './components/Profile';
 import ProfileMessage from './components/ProfileMessage';
 import SweepstakeDetails from './components/SweepstakeDetails';
+import MySweepstake from './components/MySweepstake';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ChangePassword from './components/ChangePassword';
 import './App.css';
@@ -35,6 +36,7 @@ function App() {
               path="/components/SweepstakeDetails/:id"
               component={SweepstakeDetails}
             />
+            <Route path="/components/MySweepstake" component={MySweepstake} />
           </Switch>
         </div>
       </BrowserRouter>

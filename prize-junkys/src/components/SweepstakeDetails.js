@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import MoreOption from './MoreOption';
 //import { set } from 'react-hook-form';
 
 function SweepstakeDetails(props) {
@@ -11,7 +12,7 @@ function SweepstakeDetails(props) {
   let { id } = useParams();
   console.log(id);
   const user =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vODAuMjExLjIzMy4xMjEvcHJpemVfanVua3lzL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjIwMTM5NjgxLCJleHAiOjE2MjAxNDMyODEsIm5iZiI6MTYyMDEzOTY4MSwianRpIjoid0NrcVcyOFhmd09FNlFTbiIsInN1YiI6MTAxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Kjd0l-uI4ZYQjSK0HI7OpWYNH7a5_Efk58PPIwBAaWc';
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vODAuMjExLjIzMy4xMjEvcHJpemVfanVua3lzL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjIwMjA4ODAzLCJleHAiOjE2MjAyMTI0MDMsIm5iZiI6MTYyMDIwODgwMywianRpIjoiRktFRGxKbWw4ZEtXcVlBZCIsInN1YiI6MTAxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.smdaOcjUaHG0zLsimojhrrcnz-ZyFKK_Ue2XQMvaVQc';
   useEffect(() => {
     axios
       .get('http://80.211.233.121/prize_junkys/api/sweepstake/details/' + id, {
@@ -40,12 +41,30 @@ function SweepstakeDetails(props) {
       });
   };
 
+  const changeOption = (changeParam) => {
+    switch (changeParam) {
+      case 'MySweepstake':
+        props.history.push('/components/MySweepstake');
+        break;
+      case 'MyProfile':
+        props.history.push('/components/Profile');
+        break;
+      case 'Logout':
+        props.history.push('/components/Logout');
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div>
-      <div className="headersec">
-        <h2>Sweepstake Details</h2>
+      <div>
+        <span className="wolor ">Sweepstake Details</span>
+        <MoreOption onClick={changeOption} />
       </div>
-
+      <br />
+      <br />
       <div>
         <div className="middle">
           <div className="productbg ">

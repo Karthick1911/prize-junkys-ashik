@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import MoreOption from './MoreOption';
 function Profile(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -34,10 +34,31 @@ function Profile(props) {
   const handleChangePassword = () => {
     props.history.push('/components/ChangePassword');
   };
+
+  const changeOption = (changeParam) => {
+    console.log(changeParam);
+    switch (changeParam) {
+      case 'MySweepstake':
+        props.history.push('/components/MySweepstake');
+        break;
+      case 'MyProfile':
+        props.history.push('/components/Profile');
+        break;
+      case 'Logout':
+        props.history.push('/components/Logout');
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <div>
       <div className="headersec">
-        <h4>Profile</h4>
+        <span>
+          <MoreOption onClick={changeOption} />
+        </span>
+        <h3>Profile</h3>
+
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="120"

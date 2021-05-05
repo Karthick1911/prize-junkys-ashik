@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
+import MoreOption from './MoreOption';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 //import MoreOption from './MoreOption';
@@ -16,23 +17,38 @@ function SweepStake(props) {
       });
   }, []);
 
-  const options = () => {
-    props.history.push('/components/Profile');
-  };
+  // const options = () => {
+  //   props.history.push('/components/Profile');
+  // };
 
   const handleView = (key) => {
     const link = '/components/SweepstakeDetails/' + key;
     console.log(link);
     props.history.push(link);
-    // setKey(key);
-    // setActivePage('page2');
   };
 
+  const changeOption = (changeParam) => {
+    console.log(changeParam);
+    switch (changeParam) {
+      case 'MySweepstake':
+        props.history.push('/components/MySweepstake');
+        break;
+      case 'MyProfile':
+        props.history.push('/components/Profile');
+        break;
+      case 'Logout':
+        props.history.push('/components/Logout');
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <div>
-      <div className="headersec">
-        <span className="title">Sweepstake</span>
-        <div className="header-right ">
+      <div>
+        <span className="wolor">Sweepstake</span>
+        <MoreOption onClick={changeOption} />
+        {/* <div className="header-right ">
           <button type="button" className="transparent">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -44,9 +60,9 @@ function SweepStake(props) {
             >
               <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
             </svg>
-          </button>
+          </button> 
 
-          <button type="button" className="transparent" onClick={options}>
+          {/* <button type="button" className="transparent" onClick={options}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -58,7 +74,7 @@ function SweepStake(props) {
               <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
             </svg>
           </button>
-        </div>
+        </div> */}
 
         <br />
         <br />
