@@ -17,10 +17,6 @@ function SweepStake(props) {
       });
   }, []);
 
-  // const options = () => {
-  //   props.history.push('/components/Profile');
-  // };
-
   const handleView = (key) => {
     const link = '/SweepstakeDetails/' + key;
     console.log(link);

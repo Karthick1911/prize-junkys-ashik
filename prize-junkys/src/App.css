@@ -44,8 +44,12 @@ a:hover {
   float: left;
   width: 90px;
   height: 90px;
+  position: absolute;
 }
 
+.orange {
+  color: orange;
+}
 .view {
   background-color: tomato;
   padding: 10px 20px;

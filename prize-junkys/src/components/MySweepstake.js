@@ -5,8 +5,7 @@ import MoreOption from './MoreOption';
 
 function MySweepstake(props) {
   const [items, setItems] = useState({ data: [] });
-  const user =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vODAuMjExLjIzMy4xMjEvcHJpemVfanVua3lzL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjIwMjgzNzUxLCJleHAiOjE2MjAyODczNTEsIm5iZiI6MTYyMDI4Mzc1MSwianRpIjoiVFFJWmNMNlluaWl0N2JBQiIsInN1YiI6MTAzLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4incjFScfG6t4dmfP8RHQmGi2KYBwa1kcLCKez0AOZs';
+  const user = localStorage.getItem('token');
   useEffect(() => {
     axios
       .get('http://80.211.233.121/prize_junkys/api/subscription', {
@@ -14,14 +13,14 @@ function MySweepstake(props) {
       })
 
       .then((res) => {
-        console.log(res);
+        console.log('subscription', res);
         let result = JSON.stringify(res.data.stakes);
         let arrayResult = JSON.parse(result);
-        setItems({ data: arrayResult.data });
-        console.log('result>>', arrayResult.length);
-        //setData(result);
-        //console.log(data.title);
+        setItems({ data: arrayResult });
+        console.log(arrayResult.data);
+        console.log(typeof arrayResult.data);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const changeOption = (changeParam) => {
@@ -50,24 +49,28 @@ function MySweepstake(props) {
         </span>
       </div>
       <div>
-        {items.length ? (
-          <div>
-            {items.map((item) => (
-              <div className="middle">
-                <div className="productbg ">
-                  <div key={item.id} className="image">
-                    <img src={item.image} height="100" width="100" />
-                  </div>
-                  <h4 className="desc" key={item.id}>
-                    {item.title}
-                  </h4>
-                  <br />
+        {items.data.length ? (
+          items.data.map((item) => (
+            <div className="middle">
+              <div className="productbg ">
+                <div key={item.id} className="image">
+                  <img src={item.image} height="150" width="150" />
                 </div>
+                <h4 className="desc" key={item.id}>
+                  {item.title}
+                </h4>
+                <br />
+                <h5>Start date : {item.start_date}</h5>
+                <h5>Etart date : {item.end_date}</h5>
+                <h5>Odds : {item.ratio}</h5>
+                <h5>
+                  Status :<span className="orange">{item.status_info}</span>
+                </h5>
               </div>
-            ))}
-          </div>
+            </div>
+          ))
         ) : (
-          <h2 className="wolor">No Sweepstakes</h2>
+          <h2>No SweepStake</h2>
         )}
       </div>
     </div>

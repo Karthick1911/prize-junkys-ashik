@@ -7,8 +7,7 @@ function ChangePassword(props) {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const user =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vODAuMjExLjIzMy4xMjEvcHJpemVfanVua3lzL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjIwMjgzNzUxLCJleHAiOjE2MjAyODczNTEsIm5iZiI6MTYyMDI4Mzc1MSwianRpIjoiVFFJWmNMNlluaWl0N2JBQiIsInN1YiI6MTAzLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4incjFScfG6t4dmfP8RHQmGi2KYBwa1kcLCKez0AOZs';
+  const user = localStorage.getItem('token');
 
   const {
     //register,
@@ -29,10 +28,12 @@ function ChangePassword(props) {
         console.log(response);
         // if (newPassword !== confirmPassword) {
         //   setError('Your password and confirmation password do not match');
-        // } else if (response.data.message === 'Contact Admin') {
+        // } else if (
+        //   response.data.message === 'Your password changed successfully!'
+        // ) {
         //   console.log(response.data.message);
         //   localStorage.setItem('user-info', JSON.stringify(response.data));
-        //   props.history.push('/ProfileMessage');
+        //   props.history.push('/');
         // } else {
         //   console.log(response.data.message);
         //   setError(response.data.message);
@@ -74,7 +75,7 @@ function ChangePassword(props) {
         <form onSubmit={handleSubmit(handleReset)}>
           <div class="form-outline fieldwidth">
             <input
-              type="text"
+              type="password"
               className="form-control form-control-lg "
               placeholder="Enter Old Password"
               // {...register('oldPassword', { required: true })}
@@ -89,7 +90,7 @@ function ChangePassword(props) {
 
           <div class="form-outline fieldwidth">
             <input
-              type="text"
+              type="password"
               className="form-control form-control-lg "
               placeholder="Enter New Password"
               // {...register('newPassword', { required: true })}
@@ -104,7 +105,7 @@ function ChangePassword(props) {
 
           <div class="form-outline fieldwidth">
             <input
-              type="text"
+              type="password"
               className="form-control form-control-lg "
               placeholder="Confirm New Password"
               // {...register('confirmPassword', { required: true })}

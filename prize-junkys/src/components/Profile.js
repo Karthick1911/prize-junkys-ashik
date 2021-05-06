@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MoreOption from './MoreOption';
 function Profile(props) {
@@ -8,6 +8,24 @@ function Profile(props) {
   const [age, setAge] = useState('');
   const [address, setAddress] = useState('');
   const [error, setError] = useState('');
+  const user = localStorage.getItem('token');
+  useEffect(() => {
+    axios
+      .post('http://80.211.233.121/prize_junkys/api/auth/me', {
+        headers: { Authorization: 'Bearer' + user },
+      })
+
+      .then((res) => {
+        console.log(res);
+        let result = JSON.stringify(res.data);
+        let arrayResult = JSON.parse(result);
+        //setItems({ data: arrayResult.data });
+        console.log('Profile Auth result>>', arrayResult);
+        //setData(result);
+        //console.log(data.title);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const submitButton = async () => {
     setError(null);

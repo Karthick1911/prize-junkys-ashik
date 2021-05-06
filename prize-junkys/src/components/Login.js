@@ -20,6 +20,8 @@ function Login(props) {
         console.log('message>>>', response.data.message);
         if (response.data.message === 'User logged in successfully') {
           localStorage.setItem('user-info', JSON.stringify(response.data));
+          console.log('token value>>', response.data.data.access_token);
+          localStorage.setItem('token', response.data.data.access_token);
           props.history.push('/SweepStake');
         } else {
           setError(response.data.message);

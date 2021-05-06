@@ -10,8 +10,7 @@ function SweepstakeDetails(props) {
   const [hideButton, setHideButton] = useState(true);
   let { id } = useParams();
   console.log(id);
-  const user =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vODAuMjExLjIzMy4xMjEvcHJpemVfanVua3lzL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjIwMjgzNzUxLCJleHAiOjE2MjAyODczNTEsIm5iZiI6MTYyMDI4Mzc1MSwianRpIjoiVFFJWmNMNlluaWl0N2JBQiIsInN1YiI6MTAzLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4incjFScfG6t4dmfP8RHQmGi2KYBwa1kcLCKez0AOZs';
+  const user = localStorage.getItem('token');
   useEffect(() => {
     axios
       .get('http://80.211.233.121/prize_junkys/api/sweepstake/details/' + id, {
@@ -25,7 +24,8 @@ function SweepstakeDetails(props) {
         setData(result);
         console.log(data.title);
       });
-  }, [data.title, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = () => {
     axios
