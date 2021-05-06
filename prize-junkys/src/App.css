@@ -113,6 +113,10 @@ a:hover {
   font-size: 40px;
 }
 
+.white {
+  color: white;
+}
+
 /* input::placeholder {
   color: white;
 } */

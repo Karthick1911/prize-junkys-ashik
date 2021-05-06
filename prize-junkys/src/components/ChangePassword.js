@@ -7,9 +7,11 @@ function ChangePassword(props) {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const user =
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vODAuMjExLjIzMy4xMjEvcHJpemVfanVua3lzL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjIwMjgzNzUxLCJleHAiOjE2MjAyODczNTEsIm5iZiI6MTYyMDI4Mzc1MSwianRpIjoiVFFJWmNMNlluaWl0N2JBQiIsInN1YiI6MTAzLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4incjFScfG6t4dmfP8RHQmGi2KYBwa1kcLCKez0AOZs';
 
   const {
-    register,
+    //register,
     formState: { errors },
     handleSubmit,
   } = useForm();
@@ -18,21 +20,23 @@ function ChangePassword(props) {
     setError(null);
     await axios
       .post('http://80.211.233.121/prize_junkys/api/changepassword', {
+        headers: { Authorization: 'Bearer' + user },
         old_password: oldPassword,
         new_password: newPassword,
         confirm_password: confirmPassword,
       })
       .then((response) => {
-        if (newPassword !== confirmPassword) {
-          setError('Your password and confirmation password do not match');
-        } else if (response.data.message === 'Contact Admin') {
-          console.log(response.data.message);
-          localStorage.setItem('user-info', JSON.stringify(response.data));
-          props.history.push('/ProfileMessage');
-        } else {
-          console.log(response.data.message);
-          setError(response.data.message);
-        }
+        console.log(response);
+        // if (newPassword !== confirmPassword) {
+        //   setError('Your password and confirmation password do not match');
+        // } else if (response.data.message === 'Contact Admin') {
+        //   console.log(response.data.message);
+        //   localStorage.setItem('user-info', JSON.stringify(response.data));
+        //   props.history.push('/ProfileMessage');
+        // } else {
+        //   console.log(response.data.message);
+        //   setError(response.data.message);
+        // }
       });
   };
 
@@ -73,7 +77,7 @@ function ChangePassword(props) {
               type="text"
               className="form-control form-control-lg "
               placeholder="Enter Old Password"
-              {...register('oldPassword', { required: true })}
+              // {...register('oldPassword', { required: true })}
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
             />
@@ -88,7 +92,7 @@ function ChangePassword(props) {
               type="text"
               className="form-control form-control-lg "
               placeholder="Enter New Password"
-              {...register('newPassword', { required: true })}
+              // {...register('newPassword', { required: true })}
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
@@ -103,7 +107,7 @@ function ChangePassword(props) {
               type="text"
               className="form-control form-control-lg "
               placeholder="Confirm New Password"
-              {...register('confirmPassword', { required: true })}
+              // {...register('confirmPassword', { required: true })}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
