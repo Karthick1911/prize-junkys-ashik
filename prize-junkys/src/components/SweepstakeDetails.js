@@ -6,8 +6,6 @@ import MoreOption from './MoreOption';
 
 function SweepstakeDetails(props) {
   const [data, setData] = useState({});
-  const [submitMessage, setSubmitMessage] = useState('');
-  const [hideButton, setHideButton] = useState(true);
   let { id } = useParams();
   console.log(id);
   const user = localStorage.getItem('token');
@@ -28,16 +26,17 @@ function SweepstakeDetails(props) {
   }, []);
 
   const handleSubmit = () => {
-    axios
-      .get('http://80.211.233.121/prize_junkys/api/sweepstake/details/' + id, {
-        headers: { Authorization: 'Bearer' + user },
-      })
+    props.history.push('/SweepstakeDetail/' + id);
+    // axios
+    //   .get('http://80.211.233.121/prize_junkys/api/sweepstake/details/' + id, {
+    //     headers: { Authorization: 'Bearer' + user },
+    //   })
 
-      .then((res) => {
-        console.log(res.data.ratio);
-        setSubmitMessage(res.data.ratio);
-        setHideButton(false);
-      });
+    //   .then((res) => {
+    //     console.log(res.data.ratio);
+    //     setSubmitMessage(res.data.ratio);
+    //     setHideButton(false);
+    //   });
   };
 
   const changeOption = (changeParam) => {
@@ -71,18 +70,13 @@ function SweepstakeDetails(props) {
               <img src={data.image} height="200" width="200" />
             </div>
             <h4>{data.title}</h4>
-            {submitMessage && (
-              <h7 className="redcolor">ODDS : {submitMessage}</h7>
-            )}
             <br />
             <h7>{data.description}</h7>
             <br />
             <div>
-              {hideButton && (
-                <button className="view" onClick={handleSubmit}>
-                  SUBMIT
-                </button>
-              )}
+              <button className="view" onClick={handleSubmit}>
+                SUBMIT
+              </button>
             </div>
           </div>
         </div>

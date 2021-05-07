@@ -70,7 +70,7 @@ function MySweepstake(props) {
             </div>
           ))
         ) : (
-          <h2>No SweepStake</h2>
+          <h2 className="white">No SweepStake</h2>
         )}
       </div>
     </div>

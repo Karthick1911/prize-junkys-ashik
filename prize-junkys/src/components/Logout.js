@@ -2,6 +2,7 @@ import React from 'react';
 
 function Logout(props) {
   const logout = () => {
+    localStorage.clear();
     props.history.push('/');
   };
 
