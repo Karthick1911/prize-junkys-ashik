@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useMutation, QueryClient, QueryClientProvider } from 'react-query';
+import axios from 'axios';
 import MoreOption from './MoreOption';
 
 const queryClient = new QueryClient();
@@ -25,32 +26,34 @@ function SweepstakeDetails(props) {
       )
       .then((response) => {
         console.log('subscription message :', response.data.message);
-        // switch (response.data.message) {
-        //   case 'Details are already submitted.':
-        //     setResponse(response.data.message);
-        //     break;
-        //   case 'Cannot find sweepstake details':
-        //     setResponse(response.data.message);
-        //     break;
-        //   case 'Sweepstake form submitted successfully.':
-        //     setResponse(response.data.message);
-        //     break;
-        //   default:
-        //     break;
+        switch (response.data.message) {
+          case 'Details are already submitted.':
+            setResponse(response.data.message);
+            break;
+          case 'Cannot find sweepstake details':
+            setResponse(response.data.message);
+            break;
+          case 'Sweepstake form submitted successfully.':
+            setResponse(
+              response.data.message + ', Check MySweepstake for more details'
+            );
+            break;
+          default:
+            break;
+        }
+        // if (response.data.message === 'Details are already submitted.') {
+        //   setResponse(response.data.message);
         // }
-        if (response.data.message === 'Details are already submitted.') {
-          setResponse(response.data.message);
-        }
-        if (response.data.message === 'Cannot find sweepstake details') {
-          setResponse(response.data.message);
-        }
-        if (
-          response.data.message === 'Sweepstake form submitted successfully.'
-        ) {
-          setResponse(
-            response.data.message + 'Check MySweepstake for more details'
-          );
-        }
+        // if (response.data.message === 'Cannot find sweepstake details') {
+        //   setResponse(response.data.message);
+        // }
+        // if (
+        //   response.data.message === 'Sweepstake form submitted successfully.'
+        // ) {
+        //   setResponse(
+        //     response.data.message + 'Check MySweepstake for more details'
+        //   );
+        // }
       });
   });
 
@@ -80,38 +83,6 @@ function SweepstakeDetails(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //   const subscribe = async () => {
-  //     await axios
-  //       .post('http://80.211.233.121/prize_junkys/api/stakeform/store', {
-  //         sweep_stake_id: id,
-  //         headers: { Authorization: 'Bearer' + user },
-  //       })
-  //       .then((res) => {
-  //         console.log('subscription message :', res);
-  //       });
-  //   };
-
-  //   useEffect(async () => {
-  //     const response = await axios.post(
-  //       'http://80.211.233.121/prize_junkys/api/stakeform/store',
-  //       {
-  //         sweep_stake_id: id,
-  //         headers: { Authorization: 'Bearer' + user },
-  //       }
-  //     );
-
-  //     console.log('subscription result', response);
-
-  //     //   .then((res) => {
-  //     //     console.log(res);
-  //     //     let result = res.data;
-  //     //     console.log('Subscribe result>>', result);
-  //     //     //setData(result);
-  //     //     console.log(data.title);
-  //     //     //setSubmitMessage(res.data.ratio);
-  //     //   });
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, []);
   const changeOption = (changeParam) => {
     switch (changeParam) {
       case 'MySweepstake':
@@ -131,6 +102,23 @@ function SweepstakeDetails(props) {
   return (
     <div>
       <div>
+        <span>
+          <Link to="/SweepStake" className="left">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              fill="currentColor"
+              class="bi bi-arrow-left"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+              />
+            </svg>
+          </Link>
+        </span>
         <span className="wolor ">Sweepstake Details</span>
         <MoreOption onClick={changeOption} />
       </div>

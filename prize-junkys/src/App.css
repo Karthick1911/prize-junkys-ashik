@@ -6,6 +6,12 @@ input.transparent-input {
   border: none !important;
 }
 
+.left {
+  float: left;
+  text-decoration: none;
+  color: white;
+  margin: 20px;
+}
 .transparent {
   background-color: transparent !important;
   border: none !important;
@@ -56,9 +62,7 @@ a:hover {
   color: white;
   border-radius: 10px;
 }
-.left {
-  float: left;
-}
+
 .productbg {
   background-color: white;
   margin: 20px 0px 20px 20px;
@@ -104,7 +108,7 @@ a:hover {
   width: 10%;
   display: inline;
   position: absolute;
-  padding-left: 550px;
+  padding-left: 500px;
 }
 .headersec {
   background-color: brown;
