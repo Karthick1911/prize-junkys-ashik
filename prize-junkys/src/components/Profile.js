@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useMutation, QueryClient, QueryClientProvider } from 'react-query';
 import axios from 'axios';
 import MoreOption from './MoreOption';
-//import { useEffect } from 'react/cjs/react.development';
 
 const queryClient = new QueryClient();
 function Profile(props) {
@@ -16,27 +15,35 @@ function Profile(props) {
   const [error, setError] = useState('');
   const [response, setResponse] = useState({ data: {} });
   const [message, setMessage] = useState('');
+  const [userInformation, setUserInformation] = useState({ information: {} });
   const user = localStorage.getItem('token');
 
   const { register, handleSubmit } = useForm();
 
   const mutation = useMutation(async (user) => {
-    try {
-      const response = await axios.post(
-        'http://80.211.233.121/prize_junkys/api/auth/me',
-        { Authorization: 'Bearer ' + user }
-        //{ body: { sweep_stake_id: id } },
-      );
-      console.log('Try Profile message :', response);
-      //setResponse(response);
-      //history.push('/');
-    } catch (err) {
-      console.log('CATCH ERROR: ', err.response);
-      //setResponse(err.response);
-    }
+    console.log('Token in useMutation :', user);
+    await axios
+      .post('http://80.211.233.121/prize_junkys/api/auth/me', [], {
+        headers: { Authorization: 'Bearer' + user },
+      })
+      .then((res) => {
+        console.log('Token in then :', user);
+        console.log('Try Profile message :', res);
+        console.log('resp data: ', res.data.data.email);
+        if (res.data.message === 'User profile detail.') {
+          setUserInformation({ information: res.data.data });
+        }
+      });
   });
-  const mute = (user) => mutation.mutate(user);
-
+  const mute = (user) => {
+    console.log('Token in mute:', user);
+    mutation.mutate(user);
+  };
+  useEffect(() => {
+    let token = localStorage.getItem('token');
+    mute(token);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const submitForm = async (data, user) => {
     setError(null);
     const details = {
@@ -85,7 +92,6 @@ function Profile(props) {
   const submitButton = (data) => {
     console.log('Form data : ', data);
     submitForm(data, user);
-    //mutation.mutate(data);
   };
   return (
     <div>
@@ -124,7 +130,7 @@ function Profile(props) {
                 <input
                   type="text"
                   class="form-control form-control-lg "
-                  placeholder="Name*"
+                  placeholder={userInformation.information.first_name}
                   {...register('name', {})}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -138,7 +144,7 @@ function Profile(props) {
                 <input
                   type="text"
                   class="form-control form-control-lg"
-                  placeholder="Email*"
+                  placeholder={userInformation.information.email}
                   {...register('email', {})}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -152,7 +158,7 @@ function Profile(props) {
                 <input
                   type="text"
                   class="form-control form-control-lg"
-                  placeholder="Phone Number*"
+                  placeholder={userInformation.information.mobile_no}
                   {...register('phoneNumber', {})}
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
@@ -166,7 +172,7 @@ function Profile(props) {
                 <input
                   type="text"
                   class="form-control form-control-lg"
-                  placeholder="Age*"
+                  placeholder={userInformation.information.age}
                   {...register('age', {})}
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
@@ -180,7 +186,7 @@ function Profile(props) {
                 <textarea
                   type="text"
                   class="form-control form-control-lg"
-                  placeholder="Address*"
+                  placeholder={userInformation.information.address}
                   {...register('address', {})}
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
