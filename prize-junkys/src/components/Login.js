@@ -51,7 +51,7 @@ function Login(props) {
         <input
           type="text"
           placeholder="Email"
-          className="form-control transparent-input "
+          className="form-control transparent-input white"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -72,7 +72,7 @@ function Login(props) {
         <input
           type="password"
           placeholder="Password"
-          className="form-control transparent-input"
+          className="form-control transparent-input white"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />

@@ -2,12 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import {
-  useMutation,
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from 'react-query';
+import { useMutation, QueryClient, QueryClientProvider } from 'react-query';
 import MoreOption from './MoreOption';
 
 const queryClient = new QueryClient();
@@ -16,37 +11,59 @@ function SweepstakeDetails(props) {
   const user = localStorage.getItem('token');
   const [items, setItems] = useState({});
   const [submitMessage, setSubmitMessage] = useState('');
+  const [response, setResponse] = useState('');
   const { id } = useParams();
-  //const key = id;
   console.log('id from sweep', id);
 
   const mutation = useMutation(async (id) => {
-    try {
-      //   const change = {
-      //     old_password: data.old_password,
-      //     new_password: data.new_password,
-      //     confirm_password: data.confirm_password,
-      //   };
-      console.log('PARAM ID', id);
-      const response = await axios.post(
+    console.log('PARAM ID', id);
+    await axios
+      .post(
         'http://80.211.233.121/prize_junkys/api/stakeform/store',
-        { body: { sweep_stake_id: id } },
+        { sweep_stake_id: id },
         { headers: { Authorization: 'Bearer' + user } }
-      );
-      console.log('subscription message :', response);
-      //setResponse(response);
-      //history.push('/');
-    } catch (err) {
-      console.log('CATCH ERROR: ', err.response);
-      //setResponse(err.response);
-    }
+      )
+      .then((response) => {
+        console.log('subscription message :', response.data.message);
+        // switch (response.data.message) {
+        //   case 'Details are already submitted.':
+        //     setResponse(response.data.message);
+        //     break;
+        //   case 'Cannot find sweepstake details':
+        //     setResponse(response.data.message);
+        //     break;
+        //   case 'Sweepstake form submitted successfully.':
+        //     setResponse(response.data.message);
+        //     break;
+        //   default:
+        //     break;
+        // }
+        if (response.data.message === 'Details are already submitted.') {
+          setResponse(response.data.message);
+        }
+        if (response.data.message === 'Cannot find sweepstake details') {
+          setResponse(response.data.message);
+        }
+        if (
+          response.data.message === 'Sweepstake form submitted successfully.'
+        ) {
+          setResponse(
+            response.data.message + 'Check MySweepstake for more details'
+          );
+        }
+      });
   });
 
   const mute = (id) => mutation.mutate(id);
-  const { data } = useQuery('store', mute);
+  // const { data } = useQuery('store', mute);
+  //console.log('SUBS DATA', data);
+  useEffect(() => {
+    let key = id;
+    mute(key);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
-    console.log('SUBS DATA', data);
     axios
       .get('http://80.211.233.121/prize_junkys/api/sweepstake/details/' + id, {
         headers: { Authorization: 'Bearer' + user },
@@ -134,6 +151,7 @@ function SweepstakeDetails(props) {
             <br />
           </div>
         </div>
+        {response && <h2 className="white">{response}</h2>}
       </div>
     </div>
   );
