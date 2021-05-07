@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { useMutation, QueryClient, QueryClientProvider } from 'react-query';
 import axios from 'axios';
 import MoreOption from './MoreOption';
+//import { useEffect } from 'react/cjs/react.development';
+
+const queryClient = new QueryClient();
 function Profile(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -8,47 +14,53 @@ function Profile(props) {
   const [age, setAge] = useState('');
   const [address, setAddress] = useState('');
   const [error, setError] = useState('');
+  const [response, setResponse] = useState({ data: {} });
+  const [message, setMessage] = useState('');
   const user = localStorage.getItem('token');
-  useEffect(() => {
-    axios
-      .post('http://80.211.233.121/prize_junkys/api/auth/me', {
+
+  const { register, handleSubmit } = useForm();
+
+  const mutation = useMutation(async (user) => {
+    try {
+      const response = await axios.post(
+        'http://80.211.233.121/prize_junkys/api/auth/me',
+        { Authorization: 'Bearer ' + user }
+        //{ body: { sweep_stake_id: id } },
+      );
+      console.log('Try Profile message :', response);
+      //setResponse(response);
+      //history.push('/');
+    } catch (err) {
+      console.log('CATCH ERROR: ', err.response);
+      //setResponse(err.response);
+    }
+  });
+  const mute = (user) => mutation.mutate(user);
+
+  const submitForm = async (data, user) => {
+    setError(null);
+    const details = {
+      first_name: data.name,
+      email: data.email,
+      mobile_no: data.phoneNumber,
+      age: data.age,
+      address: data.address,
+    };
+    await axios
+      .post('http://80.211.233.121/prize_junkys/api/userprofile', details, {
         headers: { Authorization: 'Bearer' + user },
       })
-
-      .then((res) => {
-        console.log(res);
-        let result = JSON.stringify(res.data);
-        let arrayResult = JSON.parse(result);
-        //setItems({ data: arrayResult.data });
-        console.log('Profile Auth result>>', arrayResult);
-        //setData(result);
-        //console.log(data.title);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const submitButton = async () => {
-    setError(null);
-    await axios
-      .post('http://80.211.233.121/prize_junkys/api/userprofile', {
-        first_name: name,
-        email: email,
-        mobile_no: phoneNumber,
-        age: age,
-        address: address,
-      })
       .then((response) => {
-        if (response.data.message === 'Contact Admin') {
-          console.log(response.data.message);
-          localStorage.setItem('user-info', JSON.stringify(response.data));
-          props.history.push('/ProfileMessage');
-        } else {
-          console.log(response.data.message);
-          setError(response.data.message);
+        console.log('Update response : ', response.data.message);
+        console.log('Update error response : ', response.data.errors);
+        if (response.data.message === 'The given data was invalid') {
+          setResponse({ data: response.data.errors });
+        }
+        if (response.data.message === 'Your Profile Updated Successfully') {
+          setMessage(response.data.message);
         }
       });
   };
-
   const handleChangePassword = () => {
     props.history.push('/ChangePassword');
   };
@@ -68,6 +80,12 @@ function Profile(props) {
       default:
         break;
     }
+  };
+
+  const submitButton = (data) => {
+    console.log('Form data : ', data);
+    submitForm(data, user);
+    //mutation.mutate(data);
   };
   return (
     <div>
@@ -98,73 +116,116 @@ function Profile(props) {
       </div>
 
       <br />
-      <div>
-        <div className="form-outline fieldwidth">
-          <input
-            type="text"
-            id="formControlLg"
-            class="form-control form-control-lg "
-            placeholder="Name*"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+      {message === '' && (
+        <div>
+          <form onSubmit={handleSubmit(submitButton)}>
+            <div>
+              <div className="form-outline fieldwidth">
+                <input
+                  type="text"
+                  class="form-control form-control-lg "
+                  placeholder="Name*"
+                  {...register('name', {})}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                {response.data.first_name && (
+                  <h3 className="white">{response.data.first_name}</h3>
+                )}
+              </div>
+              <br />
+              <div className="form-outline fieldwidth">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  placeholder="Email*"
+                  {...register('email', {})}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                {response.data.email && (
+                  <h3 className="white">{response.data.email}</h3>
+                )}
+              </div>
+              <br />
+              <div className="form-outline fieldwidth">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  placeholder="Phone Number*"
+                  {...register('phoneNumber', {})}
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+                {response.data.mobile_no && (
+                  <h3 className="white">{response.data.mobile_no}</h3>
+                )}
+              </div>
+              <br />
+              <div className="form-outline fieldwidth">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  placeholder="Age*"
+                  {...register('age', {})}
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                />
+                {response.data.age && (
+                  <h3 className="white">{response.data.age}</h3>
+                )}
+              </div>
+              <br />
+              <div className="form-outline fieldwidth">
+                <textarea
+                  type="text"
+                  class="form-control form-control-lg"
+                  placeholder="Address*"
+                  {...register('address', {})}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+                {response.data.address && (
+                  <h3 className="white">{response.data.address}</h3>
+                )}
+              </div>
+              <br />
+              {error && <h2 className="error-msg-color">{error}</h2>}
+              <div>
+                <input
+                  type="submit"
+                  className="btn-col"
+                  value="Update Profile"
+                />
+              </div>{' '}
+              <br />
+            </div>
+          </form>
+          <button className="btn-col" onClick={handleChangePassword}>
+            CHANGE PASSWORD
+          </button>
         </div>
-        <br />
-        <div className="form-outline fieldwidth">
-          <input
-            type="text"
-            id="formControlLg"
-            class="form-control form-control-lg"
-            placeholder="Email*"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+      )}
+
+      {message && (
+        <div>
+          <h1 className="white">{message}</h1>
+          <Link to="/" className="btn-col">
+            Go to Login Page
+          </Link>
         </div>
-        <br />
-        <div className="form-outline fieldwidth">
-          <input
-            type="text"
-            id="formControlLg"
-            class="form-control form-control-lg"
-            placeholder="Phone Number*"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-        </div>
-        <br />
-        <div className="form-outline fieldwidth">
-          <input
-            type="text"
-            id="formControlLg"
-            class="form-control form-control-lg"
-            placeholder="Age*"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-          />
-        </div>
-        <br />
-        <div className="form-outline fieldwidth">
-          <textarea
-            type="text"
-            id="formControlLg"
-            class="form-control form-control-lg"
-            placeholder="Address*"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </div>
-        <br />
-        {error && <h2 className="error-msg-color">{error}</h2>}
-        <button className="btn-col" onClick={submitButton}>
-          SUBMIT
-        </button>
-        <br />
-        <button className="btn-col" onClick={handleChangePassword}>
-          CHANGE PASSWORD
-        </button>
-      </div>
+      )}
     </div>
   );
 }
 
-export default Profile;
+// Higher order function
+const hof = (WrappedComponent) => {
+  // Its job is to return a react component warpping the baby component
+  return (props) => (
+    <QueryClientProvider client={queryClient}>
+      <WrappedComponent {...props} />
+    </QueryClientProvider>
+  );
+};
+export default hof(Profile);
