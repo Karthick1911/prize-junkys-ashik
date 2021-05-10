@@ -57,7 +57,7 @@ function Register(props) {
             width="40"
             height="40"
             fill="currentColor"
-            class="bi bi-arrow-left"
+            className="bi bi-arrow-left"
             viewBox="0 0 16 16"
           >
             <path
@@ -69,11 +69,11 @@ function Register(props) {
       </span>
       <h2 className="wolor">Register</h2>
 
-      <div class="form-outline fieldwidth">
+      <div className="form-outline fieldwidth">
         <input
           type="text"
           id="formControlLg"
-          class="form-control form-control-lg "
+          className="form-control form-control-lg "
           placeholder="Name*"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -81,10 +81,10 @@ function Register(props) {
         {data.first_name && <h4 className="white">{data.first_name}</h4>}
       </div>
       <br />
-      <div class="form-outline fieldwidth">
+      <div className="form-outline fieldwidth">
         <input
           type="text"
-          class="form-control form-control-lg"
+          className="form-control form-control-lg"
           placeholder="Email*"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -92,10 +92,10 @@ function Register(props) {
         {data.email && <h4 className="white">{data.email}</h4>}
       </div>
       <br />
-      <div class="form-outline fieldwidth">
+      <div className="form-outline fieldwidth">
         <input
           type="text"
-          class="form-control form-control-lg"
+          className="form-control form-control-lg"
           placeholder="Phone Number*"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
@@ -103,10 +103,10 @@ function Register(props) {
         {data.mobile_no && <h4 className="white">{data.mobile_no}</h4>}
       </div>
       <br />
-      <div class="form-outline fieldwidth">
+      <div className="form-outline fieldwidth">
         <input
           type="password"
-          class="form-control form-control-lg"
+          className="form-control form-control-lg"
           placeholder="Password*"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -114,10 +114,10 @@ function Register(props) {
         {data.password && <h4 className="white">{data.password}</h4>}
       </div>
       <br />
-      <div class="form-outline fieldwidth">
+      <div className="form-outline fieldwidth">
         <input
           type="password"
-          class="form-control form-control-lg"
+          className="form-control form-control-lg"
           placeholder="Confirm Password*"
           value={confirmPasssword}
           onChange={(e) => setConfirmPasssword(e.target.value)}
@@ -125,10 +125,10 @@ function Register(props) {
         {error && <h4 className="white">{error}</h4>}
       </div>
       <br />
-      <div class="form-outline fieldwidth">
+      <div className="form-outline fieldwidth">
         <input
           type="text"
-          class="form-control form-control-lg"
+          className="form-control form-control-lg"
           placeholder="Age*"
           value={age}
           onChange={(e) => setAge(e.target.value)}
@@ -136,17 +136,17 @@ function Register(props) {
         {data.age && <h4 className="white">{data.age}</h4>}
       </div>
       <br />
-      <div class="form-outline fieldwidth">
+      <div className="form-outline fieldwidth">
         <textarea
           type="text"
-          class="form-control form-control-lg"
+          className="form-control form-control-lg"
           placeholder="Address*"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
         {data.address && <h4 className="white">{data.address}</h4>}
       </div>
-      {/* {error && <h2 className="error-msg-color">{error}</h2>} */}
+
       <br />
       <button className="btn-col" onClick={submitButton}>
         SUBMIT

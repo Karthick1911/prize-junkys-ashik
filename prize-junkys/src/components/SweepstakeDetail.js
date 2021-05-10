@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -41,29 +42,14 @@ function SweepstakeDetails(props) {
           default:
             break;
         }
-        // if (response.data.message === 'Details are already submitted.') {
-        //   setResponse(response.data.message);
-        // }
-        // if (response.data.message === 'Cannot find sweepstake details') {
-        //   setResponse(response.data.message);
-        // }
-        // if (
-        //   response.data.message === 'Sweepstake form submitted successfully.'
-        // ) {
-        //   setResponse(
-        //     response.data.message + 'Check MySweepstake for more details'
-        //   );
-        // }
       });
   });
 
   const mute = (id) => mutation.mutate(id);
-  // const { data } = useQuery('store', mute);
-  //console.log('SUBS DATA', data);
+
   useEffect(() => {
     let key = id;
     mute(key);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -80,7 +66,6 @@ function SweepstakeDetails(props) {
         console.log('title', items.title);
         setSubmitMessage(res.data.ratio);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const changeOption = (changeParam) => {
@@ -109,7 +94,7 @@ function SweepstakeDetails(props) {
               width="40"
               height="40"
               fill="currentColor"
-              class="bi bi-arrow-left"
+              className="bi bi-arrow-left"
               viewBox="0 0 16 16"
             >
               <path

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -21,7 +22,6 @@ function MySweepstake(props) {
         console.log(arrayResult.data);
         console.log(typeof arrayResult.data);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const changeOption = (changeParam) => {

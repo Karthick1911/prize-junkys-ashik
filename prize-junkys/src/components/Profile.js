@@ -103,7 +103,7 @@ function Profile(props) {
               width="40"
               height="40"
               fill="currentColor"
-              class="bi bi-arrow-left"
+              className="bi bi-arrow-left"
               viewBox="0 0 16 16"
             >
               <path
@@ -123,7 +123,7 @@ function Profile(props) {
           width="120"
           height="120"
           fill="currentColor"
-          class="bi bi-person-circle"
+          className="bi bi-person-circle"
           viewBox="0 0 16 16"
         >
           <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -146,7 +146,7 @@ function Profile(props) {
               <div className="form-outline fieldwidth">
                 <input
                   type="text"
-                  class="form-control form-control-lg "
+                  className="form-control form-control-lg "
                   placeholder={userInformation.information.first_name}
                   {...register('name', {})}
                   value={name}
@@ -160,7 +160,7 @@ function Profile(props) {
               <div className="form-outline fieldwidth">
                 <input
                   type="text"
-                  class="form-control form-control-lg"
+                  className="form-control form-control-lg"
                   placeholder={userInformation.information.email}
                   {...register('email', {})}
                   value={email}
@@ -174,7 +174,7 @@ function Profile(props) {
               <div className="form-outline fieldwidth">
                 <input
                   type="text"
-                  class="form-control form-control-lg"
+                  className="form-control form-control-lg"
                   placeholder={userInformation.information.mobile_no}
                   {...register('phoneNumber', {})}
                   value={phoneNumber}
@@ -188,7 +188,7 @@ function Profile(props) {
               <div className="form-outline fieldwidth">
                 <input
                   type="text"
-                  class="form-control form-control-lg"
+                  className="form-control form-control-lg"
                   placeholder={userInformation.information.age}
                   {...register('age', {})}
                   value={age}
@@ -202,7 +202,7 @@ function Profile(props) {
               <div className="form-outline fieldwidth">
                 <textarea
                   type="text"
-                  class="form-control form-control-lg"
+                  className="form-control form-control-lg"
                   placeholder={userInformation.information.address}
                   {...register('address', {})}
                   value={address}

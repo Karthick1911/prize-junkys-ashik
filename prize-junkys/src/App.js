@@ -3,7 +3,6 @@ import SweepStake from './components/SweepStake';
 import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import Profile from './components/Profile';
-import ProfileMessage from './components/ProfileMessage';
 import SweepstakeDetails from './components/SweepstakeDetails';
 import MySweepstake from './components/MySweepstake';
 import Logout from './components/Logout';
@@ -23,7 +22,6 @@ function App() {
             <Route path="/Register" component={Register} />
             <Route path="/Profile" component={Profile} />
             <Route path="/ForgotPassword" component={ForgotPassword} />
-            <Route path="/ProfileMessage" component={ProfileMessage} />
             <Route path="/ChangePassword" component={ChangePassword} />
             <Route
               path="/SweepstakeDetails/:id"

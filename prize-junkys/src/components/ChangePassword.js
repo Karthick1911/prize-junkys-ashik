@@ -78,7 +78,7 @@ function ChangePassword(props) {
               width="40"
               height="40"
               fill="currentColor"
-              class="bi bi-arrow-left"
+              className="bi bi-arrow-left"
               viewBox="0 0 16 16"
             >
               <path
@@ -118,7 +118,7 @@ function ChangePassword(props) {
             </div>
             <br />
 
-            <div class="form-outline fieldwidth">
+            <div className="form-outline fieldwidth">
               <input
                 type="password"
                 name="newPassword"
@@ -134,7 +134,7 @@ function ChangePassword(props) {
             </div>
             <br />
 
-            <div class="form-outline fieldwidth">
+            <div className="form-outline fieldwidth">
               <input
                 type="password"
                 name="confirmPassword"
