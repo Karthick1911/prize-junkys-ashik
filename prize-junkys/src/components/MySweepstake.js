@@ -1,13 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import MoreOption from './MoreOption';
 
 function MySweepstake(props) {
   const [items, setItems] = useState({ data: [] });
   const user = localStorage.getItem('token');
+  const history = useHistory();
+
   useEffect(() => {
     axios
       .get('http://80.211.233.121/prize_junkys/api/subscription', {
@@ -28,13 +30,13 @@ function MySweepstake(props) {
     console.log(changeParam);
     switch (changeParam) {
       case 'MySweepstake':
-        props.history.push('/MySweepstake');
+        history.push('/MySweepstake');
         break;
       case 'MyProfile':
-        props.history.push('/Profile');
+        history.push('/Profile');
         break;
       case 'Logout':
-        props.history.push('/Logout');
+        history.push('/Logout');
         break;
       default:
         break;

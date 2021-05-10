@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useMutation, QueryClient, QueryClientProvider } from 'react-query';
 import axios from 'axios';
 import MoreOption from './MoreOption';
@@ -16,6 +17,7 @@ function Profile(props) {
   const [response, setResponse] = useState({ data: {} });
   const [message, setMessage] = useState('');
   const [userInformation, setUserInformation] = useState({ information: {} });
+  const history = useHistory();
   const user = localStorage.getItem('token');
 
   const { register, handleSubmit } = useForm();
@@ -42,7 +44,6 @@ function Profile(props) {
   useEffect(() => {
     let token = localStorage.getItem('token');
     mute(token);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const submitForm = async (data, user) => {
     setError(null);
@@ -69,20 +70,20 @@ function Profile(props) {
       });
   };
   const handleChangePassword = () => {
-    props.history.push('/ChangePassword');
+    history.push('/ChangePassword');
   };
 
   const changeOption = (changeParam) => {
     console.log(changeParam);
     switch (changeParam) {
       case 'MySweepstake':
-        props.history.push('/MySweepstake');
+        history.push('/MySweepstake');
         break;
       case 'MyProfile':
-        props.history.push('/Profile');
+        history.push('/Profile');
         break;
       case 'Logout':
-        props.history.push('/Logout');
+        history.push('/Logout');
         break;
       default:
         break;

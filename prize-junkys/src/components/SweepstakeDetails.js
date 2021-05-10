@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 
@@ -8,9 +9,11 @@ import MoreOption from './MoreOption';
 
 function SweepstakeDetails(props) {
   const [data, setData] = useState({});
+  const history = useHistory();
   let { id } = useParams();
   console.log(id);
   const user = localStorage.getItem('token');
+
   useEffect(() => {
     axios
       .get('http://80.211.233.121/prize_junkys/api/sweepstake/details/' + id, {
@@ -24,23 +27,22 @@ function SweepstakeDetails(props) {
         setData(result);
         console.log(data.title);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit = () => {
-    props.history.push('/SweepstakeDetail/' + id);
+    history.push('/SweepstakeDetail/' + id);
   };
 
   const changeOption = (changeParam) => {
     switch (changeParam) {
       case 'MySweepstake':
-        props.history.push('/MySweepstake');
+        history.push('/MySweepstake');
         break;
       case 'MyProfile':
-        props.history.push('/Profile');
+        history.push('/Profile');
         break;
       case 'Logout':
-        props.history.push('/Logout');
+        history.push('/Logout');
         break;
       default:
         break;

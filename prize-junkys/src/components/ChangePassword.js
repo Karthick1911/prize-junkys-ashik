@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useMutation, QueryClient, QueryClientProvider } from 'react-query';
 import MoreOption from './MoreOption';
 
@@ -15,19 +15,20 @@ function ChangePassword(props) {
   const [response, setResponse] = useState({ data: {} });
   const [message, setMessage] = useState('');
   const user = localStorage.getItem('token');
+  const history = useHistory();
 
   const { register, handleSubmit } = useForm();
 
   const changeOption = (changeParam) => {
     switch (changeParam) {
       case 'MySweepstake':
-        props.history.push('/MySweepstake');
+        history.push('/MySweepstake');
         break;
       case 'MyProfile':
-        props.history.push('/Profile');
+        history.push('/Profile');
         break;
       case 'Logout':
-        props.history.push('/Logout');
+        history.push('/Logout');
         break;
       default:
         break;

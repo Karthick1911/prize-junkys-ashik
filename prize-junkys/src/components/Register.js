@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 function Register(props) {
@@ -12,6 +13,15 @@ function Register(props) {
   const [address, setAddress] = useState('');
   const [data, setData] = useState({});
   const [error, setError] = useState('');
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem('user-info')) {
+      history.push('/SweepStake');
+    }
+  }, []);
+
   const handleSubmit = async () => {
     setData({});
     setError('');
@@ -30,7 +40,7 @@ function Register(props) {
         if (response.data.message === 'User registered successfully') {
           console.log(response.data.message);
           localStorage.setItem('user-info', JSON.stringify(response.data));
-          props.history.push('/');
+          history.push('/');
         } else {
           console.log(response.data.message);
           setData(response.data.errors);

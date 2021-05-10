@@ -252,12 +252,12 @@ nav ul:after {
 
 nav ul li {
   float: left;
-  width: 200px;
+  width: 130px;
   text-align: center;
 }
 
 nav ul li:hover {
-  background: white;
+  background: #f39;
 }
 
 nav ul li:hover button {
@@ -283,6 +283,7 @@ nav ul ul li {
   float: none;
   position: relative;
   border-top: 1px solid #f39;
+  background-color: white;
 }
 
 nav ul ul li button {

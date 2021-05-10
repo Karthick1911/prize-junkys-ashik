@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 function Login(props) {
@@ -7,6 +8,13 @@ function Login(props) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
+  const history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem('user-info')) {
+      history.push('/SweepStake');
+    }
+  }, []);
   const handleLogin = async () => {
     setError(null);
     console.log(email, password);
@@ -22,7 +30,7 @@ function Login(props) {
           localStorage.setItem('user-info', JSON.stringify(response.data));
           console.log('token value>>', response.data.data.access_token);
           localStorage.setItem('token', response.data.data.access_token);
-          props.history.push('/SweepStake');
+          history.push('/SweepStake');
         } else {
           setError(response.data.message);
         }
@@ -30,7 +38,7 @@ function Login(props) {
   };
 
   const handleResister = () => {
-    props.history.push('/Register');
+    history.push('/Register');
   };
   return (
     <div>

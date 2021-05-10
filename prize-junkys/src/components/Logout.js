@@ -1,14 +1,16 @@
 import React from 'react';
-
+import { useHistory } from 'react-router-dom';
 function Logout(props) {
   const logout = () => {
     localStorage.clear();
-    props.history.push('/');
+    history.push('/');
   };
 
   const cancel = () => {
-    props.history.push('/SweepStake');
+    history.push('/SweepStake');
   };
+
+  const history = useHistory();
 
   return (
     <div className="popup">

@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-//import PasswordMessage from './PasswordMessage';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 function ForgotPassword(props) {
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem('user-info')) {
+      history.push('/SweepStake');
+    }
+  }, []);
+
   const handleReset = async () => {
     setError(null);
     await axios

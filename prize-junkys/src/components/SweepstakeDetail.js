@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useMutation, QueryClient, QueryClientProvider } from 'react-query';
 import axios from 'axios';
@@ -14,6 +14,7 @@ function SweepstakeDetails(props) {
   const [items, setItems] = useState({});
   const [submitMessage, setSubmitMessage] = useState('');
   const [response, setResponse] = useState('');
+  const history = useHistory();
   const { id } = useParams();
   console.log('id from sweep', id);
 
@@ -71,13 +72,13 @@ function SweepstakeDetails(props) {
   const changeOption = (changeParam) => {
     switch (changeParam) {
       case 'MySweepstake':
-        props.history.push('/MySweepstake');
+        history.push('/MySweepstake');
         break;
       case 'MyProfile':
-        props.history.push('/Profile');
+        history.push('/Profile');
         break;
       case 'Logout':
-        props.history.push('/Logout');
+        history.push('/Logout');
         break;
       default:
         break;
