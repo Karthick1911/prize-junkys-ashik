@@ -105,7 +105,7 @@ function Register(props) {
       <br />
       <div class="form-outline fieldwidth">
         <input
-          type="text"
+          type="password"
           class="form-control form-control-lg"
           placeholder="Password*"
           value={password}
@@ -116,7 +116,7 @@ function Register(props) {
       <br />
       <div class="form-outline fieldwidth">
         <input
-          type="text"
+          type="password"
           class="form-control form-control-lg"
           placeholder="Confirm Password*"
           value={confirmPasssword}

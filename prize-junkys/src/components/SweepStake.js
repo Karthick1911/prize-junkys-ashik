@@ -7,6 +7,8 @@ import MoreOption from './MoreOption';
 function SweepStake(props) {
   const [items, setItems] = useState({ data: [] });
   const [view, setView] = useState('grid');
+  const [search, setSearch] = useState('');
+  const [filteredItems, setFilteredItems] = useState([]);
   useEffect(() => {
     axios
       .get('http://80.211.233.121/prize_junkys/api/sweepstake/', {})
@@ -18,6 +20,21 @@ function SweepStake(props) {
         console.log(typeof arrayResult.data);
       });
   }, []);
+
+  useEffect(() => {
+    setFilteredItems(
+      items.data.filter((post) => {
+        console.log('post title:', post.title);
+        const title = post.title.toLowerCase();
+        if (search) {
+          return title.includes(search.toLowerCase());
+        }
+      })
+    );
+  }, [search, items.data]);
+
+  console.log('normal post', items.data);
+  console.log('filtered post:', filteredItems);
 
   const handleView = (key) => {
     const link = '/SweepstakeDetails/' + key;
@@ -130,11 +147,52 @@ function SweepStake(props) {
             placeholder="Search by Sweepstake Titles"
             aria-label="Search"
             aria-describedby="search-addon"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              let length = filteredItems.length;
+              if (length > 1) {
+                setFilteredItems((filteredItems[length] = []));
+              }
+            }}
           />
         </div>
       </div>
+
+      {search && (
+        <div>
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item) => (
+              <div>
+                <div className="middle">
+                  <div className="productbg ">
+                    <div key={item.id} className="image">
+                      <img src={item.image} height="100" width="100" />
+                    </div>
+                    <h4 className="desc" key={item.id}>
+                      {item.title}
+                    </h4>
+                    <br />
+                    <button
+                      key={item.id}
+                      className="view"
+                      onClick={() => {
+                        handleView(item.id);
+                      }}
+                    >
+                      view
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <h2 className="white">Not Found</h2>
+          )}
+        </div>
+      )}
       <div>
-        {view === 'list' && (
+        {view === 'list' && search === '' && (
           <div>
             {items.data.length &&
               items.data.map((item) => (
@@ -164,7 +222,7 @@ function SweepStake(props) {
           </div>
         )}
 
-        {view === 'grid' && (
+        {view === 'grid' && search === '' && (
           <div>
             {items.data.length &&
               items.data.map((item) => (

@@ -12,15 +12,6 @@ input.transparent-input {
   /* position: absolute; */
 }
 
-.header-right-width {
-  float: right;
-  padding: 5px;
-  width: 10%;
-  display: inline;
-  position: absolute;
-  padding-left: 500px;
-}
-
 .left {
   float: left;
   text-decoration: none;
@@ -95,7 +86,7 @@ a:hover {
   float: inline-start;
 }
 .middle {
-  margin-left: 250px;
+  margin-left: 300px;
 }
 
 .gridwidth {
@@ -216,6 +207,14 @@ a:hover {
 
 /* For DropDown in MoreOption component */
 
+.header-right-width {
+  float: right;
+  padding: 5px;
+  width: 10%;
+  display: inline;
+  position: absolute;
+  padding-left: 480px;
+}
 #container {
   display: inline;
   width: 600px;
@@ -242,7 +241,7 @@ nav ul {
   list-style: none;
 }
 nav ul :hover {
-  background: white;
+  border-color: white;
 }
 
 nav ul:after {
@@ -262,7 +261,7 @@ nav ul li:hover {
 }
 
 nav ul li:hover button {
-  color: white;
+  color: black;
 }
 
 nav ul li button {

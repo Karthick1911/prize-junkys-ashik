@@ -50,11 +50,12 @@ function ForgotPassword(props) {
       <br />
       <h2 className="wolor">Forget Password?</h2>
       <br />
-      <div class="form-outline fieldwidth">
+
+      <div className="form-outline fieldwidth">
         <input
           type="text"
           id="formControlLg"
-          class="form-control form-control-lg "
+          className="form-control form-control-lg "
           placeholder="Email Id"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
