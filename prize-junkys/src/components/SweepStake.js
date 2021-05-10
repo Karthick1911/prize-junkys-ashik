@@ -6,6 +6,7 @@ import MoreOption from './MoreOption';
 //import MoreOption from './MoreOption';
 function SweepStake(props) {
   const [items, setItems] = useState({ data: [] });
+  const [view, setView] = useState('grid');
   useEffect(() => {
     axios
       .get('http://80.211.233.121/prize_junkys/api/sweepstake/', {})
@@ -40,6 +41,16 @@ function SweepStake(props) {
         break;
     }
   };
+
+  const listView = () => {
+    setView('list');
+    console.log(view);
+  };
+
+  const gridView = () => {
+    setView('grid');
+    console.log(view);
+  };
   return (
     <div>
       <div>
@@ -61,6 +72,41 @@ function SweepStake(props) {
           </Link>
         </span>
         <span className="wolor">Sweepstake</span>
+        {view === 'list' && (
+          <span>
+            <button className="transparent rightviewbtn" onClick={gridView}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="50"
+                height="50"
+                fill="currentColor"
+                className="bi bi-grid transparent rightviewbtn"
+                viewBox="0 0 16 16"
+              >
+                <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+              </svg>
+            </button>
+          </span>
+        )}
+        {view === 'grid' && (
+          <span>
+            <button className="transparent rightviewbtn" onClick={listView}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="50"
+                height="50"
+                fill="currentColor"
+                className="bi bi-list  transparent rightviewbtn"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+                />
+              </svg>
+            </button>
+          </span>
+        )}
         <MoreOption onClick={changeOption} />
 
         <br />
@@ -88,31 +134,63 @@ function SweepStake(props) {
         </div>
       </div>
       <div>
-        <div>
-          {items.data.length &&
-            items.data.map((item) => (
-              <div className="middle">
-                <div className="productbg ">
-                  <div key={item.id} className="image">
-                    <img src={item.image} height="100" width="100" />
+        {view === 'list' && (
+          <div>
+            {items.data.length &&
+              items.data.map((item) => (
+                <div>
+                  <div className="middle">
+                    <div className="productbg ">
+                      <div key={item.id} className="image">
+                        <img src={item.image} height="100" width="100" />
+                      </div>
+                      <h4 className="desc" key={item.id}>
+                        {item.title}
+                      </h4>
+                      <br />
+                      <button
+                        key={item.id}
+                        className="view"
+                        onClick={() => {
+                          handleView(item.id);
+                        }}
+                      >
+                        view
+                      </button>
+                    </div>
                   </div>
-                  <h4 className="desc" key={item.id}>
-                    {item.title}
-                  </h4>
-                  <br />
-                  <button
-                    key={item.id}
-                    className="view"
-                    onClick={() => {
-                      handleView(item.id);
-                    }}
-                  >
-                    view
-                  </button>
                 </div>
-              </div>
-            ))}
-        </div>
+              ))}
+          </div>
+        )}
+
+        {view === 'grid' && (
+          <div>
+            {items.data.length &&
+              items.data.map((item) => (
+                <span className=" gridinner">
+                  <span className=" gridproduct">
+                    <div key={item.id} className="image">
+                      <img src={item.image} height="100" width="100" />
+                    </div>
+                    <h4 className="desc" key={item.id}>
+                      {item.title}
+                    </h4>
+                    <br />
+                    <button
+                      key={item.id}
+                      className="view"
+                      onClick={() => {
+                        handleView(item.id);
+                      }}
+                    >
+                      view
+                    </button>
+                  </span>
+                </span>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );

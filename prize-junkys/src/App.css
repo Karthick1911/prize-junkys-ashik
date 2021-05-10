@@ -6,6 +6,21 @@ input.transparent-input {
   border: none !important;
 }
 
+.rightviewbtn {
+  margin-left: 50px;
+  padding-bottom: 10px;
+  /* position: absolute; */
+}
+
+.header-right-width {
+  float: right;
+  padding: 5px;
+  width: 10%;
+  display: inline;
+  position: absolute;
+  padding-left: 500px;
+}
+
 .left {
   float: left;
   text-decoration: none;
@@ -70,7 +85,7 @@ a:hover {
   padding: 20px;
   border-radius: 5px;
   flex: auto;
-  width: 50%;
+  width: 40%;
 }
 
 .redcolor {
@@ -81,6 +96,35 @@ a:hover {
 }
 .middle {
   margin-left: 250px;
+}
+
+.gridwidth {
+  margin-left: 250px;
+  width: 25%;
+  height: 200px;
+  display: block;
+}
+
+.gridouter {
+  display: inline;
+  border: solid 2px white;
+  width: 10%;
+}
+
+.gridinner {
+  /* margin-left: 250px; */
+  display: inline-flex;
+  width: 40%;
+}
+
+.gridproduct {
+  background-color: white;
+  margin: 20px 0px 20px 20px;
+  padding: 20px;
+  border-radius: 5px;
+  flex: auto;
+  width: 40%;
+  margin: 20px;
 }
 .bordernone {
   border: none;
@@ -102,14 +146,6 @@ a:hover {
   padding: 5px;
 }
 
-.header-right-width {
-  float: right;
-  padding: 5px;
-  width: 10%;
-  display: inline;
-  position: absolute;
-  padding-left: 500px;
-}
 .headersec {
   background-color: brown;
   color: white;
