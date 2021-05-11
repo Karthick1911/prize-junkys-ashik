@@ -12,12 +12,15 @@ function ChangePassword(props) {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [response, setResponse] = useState({ data: {} });
   const [message, setMessage] = useState('');
   const user = localStorage.getItem('token');
   const history = useHistory();
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const changeOption = (changeParam) => {
     switch (changeParam) {
@@ -48,7 +51,6 @@ function ChangePassword(props) {
         { headers: { Authorization: 'Bearer' + user } }
       );
       console.log('Try Response: ', response.data);
-      setResponse({ data: response.data });
       console.log('Message :', response.data.message);
       if (response.data.message === 'Incorrect old password!') {
         setError(response.data.message);
@@ -67,7 +69,11 @@ function ChangePassword(props) {
 
   const handleReset = (data) => {
     console.log('Form data : ', data);
-    mutation.mutate(data);
+    if (data.newPassword !== data.confirmPassword) {
+      setError('The confirm password and new password must match.');
+    } else {
+      mutation.mutate(data);
+    }
   };
   return (
     <div>
@@ -105,16 +111,16 @@ function ChangePassword(props) {
             <div class="form-outline fieldwidth">
               <input
                 type="password"
-                name="oldPassword"
                 className="form-control form-control-lg "
                 placeholder="Enter Old Password"
-                {...register('oldPassword', {})}
+                {...register('oldPassword', {
+                  required: 'The Old Password field is required.',
+                })}
                 value={oldPassword}
                 onChange={(e) => setOldPassword(e.target.value)}
               />
-              {error && <h3 className="white">{error}</h3>}
-              {response.data.errors && (
-                <h3 className="white">{response.data.errors.old_password}</h3>
+              {errors.oldPassword && (
+                <h3 className="white">{errors.oldPassword.message}</h3>
               )}
             </div>
             <br />
@@ -122,15 +128,25 @@ function ChangePassword(props) {
             <div className="form-outline fieldwidth">
               <input
                 type="password"
-                name="newPassword"
                 className="form-control form-control-lg "
                 placeholder="Enter New Password"
-                {...register('newPassword', {})}
+                {...register('newPassword', {
+                  required: 'The New Password field is required.',
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                    message:
+                      'Password should contain Uppercase, Lowercase,Special character and Numeric.',
+                  },
+                  minLength: {
+                    value: 6,
+                    message: 'The new password must be at least 6 characters.',
+                  },
+                })}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
-              {response.data.errors && (
-                <h3 className="white">{response.data.errors.new_password}</h3>
+              {errors.newPassword && (
+                <h3 className="white">{errors.newPassword.message}</h3>
               )}
             </div>
             <br />
@@ -138,17 +154,27 @@ function ChangePassword(props) {
             <div className="form-outline fieldwidth">
               <input
                 type="password"
-                name="confirmPassword"
                 className="form-control form-control-lg "
                 placeholder="Confirm New Password"
-                {...register('confirmPassword', {})}
+                {...register('confirmPassword', {
+                  required: 'The Confirm Password field is required.',
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                    message:
+                      'Confirm Password should contain Uppercase, Lowercase,Special character and Numeric.',
+                  },
+                  minLength: {
+                    value: 6,
+                    message: 'The new password must be at least 6 characters.',
+                  },
+                })}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              {response.data.errors && (
-                <h3 className="white">
-                  {response.data.errors.confirm_password}
-                </h3>
+              {errors.confirmPassword ? (
+                <h3 className="white">{errors.confirmPassword.message}</h3>
+              ) : (
+                error && <h3 className="white">{error}</h3>
               )}
             </div>
             <br />
