@@ -163,7 +163,7 @@ function ChangePassword(props) {
       {message && (
         <div>
           <h1 className="white">{message}</h1>
-          <Link to="/" className="btn-col">
+          <Link to="/" onClick={localStorage.clear()} className="btn-col">
             Go to Login Page
           </Link>
         </div>
