@@ -1,14 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
 function ForgotPassword(props) {
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
-
   const history = useHistory();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     if (localStorage.getItem('user-info')) {
@@ -16,11 +21,11 @@ function ForgotPassword(props) {
     }
   }, []);
 
-  const handleReset = async () => {
+  const handleReset = async (data) => {
     setError(null);
     await axios
       .post('http://80.211.233.121/prize_junkys/api/auth/passwordreset', {
-        email: email,
+        email: data.email,
       })
       .then((response) => {
         console.log('response>>>', response);
@@ -35,6 +40,10 @@ function ForgotPassword(props) {
       });
   };
 
+  const submitButton = (data) => {
+    console.log('Form data : ', data);
+    handleReset(data);
+  };
   return (
     <div>
       <span>
@@ -58,22 +67,33 @@ function ForgotPassword(props) {
       <br />
       <h2 className="wolor">Forget Password?</h2>
       <br />
-
-      <div className="form-outline fieldwidth">
-        <input
-          type="text"
-          id="formControlLg"
-          className="form-control form-control-lg "
-          placeholder="Email Id"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      {error && <h4 className="error-msg-color">{error}</h4>}
-      <br />
-      <button className="btn-col" onClick={handleReset}>
-        RESET PASSWORD
-      </button>
+      <form onSubmit={handleSubmit(submitButton)}>
+        <div className="form-outline fieldwidth">
+          <input
+            type="text"
+            className="form-control form-control-lg"
+            placeholder="Email"
+            {...register('email', {
+              required: 'The email field is required.',
+              pattern: {
+                value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                message: 'Email format is invalid',
+              },
+            })}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {errors.email ? (
+            <h3 className="white">{errors.email.message}</h3>
+          ) : (
+            error && <h3 className="white">{error}</h3>
+          )}
+        </div>
+        <br />
+        <div>
+          <input type="submit" className="btn-col" value="RESET PASSWORD" />
+        </div>
+      </form>
       <br />
       <br />
       <br />
