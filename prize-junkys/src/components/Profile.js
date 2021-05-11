@@ -20,7 +20,11 @@ function Profile(props) {
   const history = useHistory();
   const user = localStorage.getItem('token');
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const mutation = useMutation(async (user) => {
     console.log('Token in useMutation :', user);
@@ -149,13 +153,18 @@ function Profile(props) {
                   type="text"
                   className="form-control form-control-lg "
                   placeholder={userInformation.information.first_name}
-                  {...register('name', {})}
+                  {...register('name', {
+                    required: 'The Name field is required.',
+                  })}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-                {response.data.first_name && (
-                  <h3 className="white">{response.data.first_name}</h3>
+                {errors.name && (
+                  <h3 className="white">{errors.name.message}</h3>
                 )}
+                {/* {response.data.first_name && (
+                  <h3 className="white">{response.data.first_name}</h3>
+                )} */}
               </div>
               <br />
               <div className="form-outline fieldwidth">
@@ -163,27 +172,46 @@ function Profile(props) {
                   type="text"
                   className="form-control form-control-lg"
                   placeholder={userInformation.information.email}
-                  {...register('email', {})}
+                  {...register('email', {
+                    required: 'The Email field is required.',
+                    pattern: {
+                      value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                      message: 'Email format is invalid',
+                    },
+                  })}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                {response.data.email && (
-                  <h3 className="white">{response.data.email}</h3>
+                {errors.email && (
+                  <h3 className="white">{errors.email.message}</h3>
                 )}
+                {/* {response.data.email && (
+                  <h3 className="white">{response.data.email}</h3>
+                )} */}
               </div>
               <br />
               <div className="form-outline fieldwidth">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control form-control-lg"
                   placeholder={userInformation.information.mobile_no}
-                  {...register('phoneNumber', {})}
+                  {...register('phoneNumber', {
+                    required: 'The Phone Number field is required.',
+                    pattern: {
+                      value: /^\d{10,15}$/,
+                      message:
+                        'The mobile no must be between 10 and 15 digits.',
+                    },
+                  })}
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
-                {response.data.mobile_no && (
-                  <h3 className="white">{response.data.mobile_no}</h3>
+                {errors.phoneNumber && (
+                  <h3 className="white">{errors.phoneNumber.message}</h3>
                 )}
+                {/* {response.data.mobile_no && (
+                  <h3 className="white">{response.data.mobile_no}</h3>
+                )} */}
               </div>
               <br />
               <div className="form-outline fieldwidth">
@@ -191,13 +219,20 @@ function Profile(props) {
                   type="text"
                   className="form-control form-control-lg"
                   placeholder={userInformation.information.age}
-                  {...register('age', {})}
+                  {...register('age', {
+                    required: 'The Age field is required.',
+                    pattern: {
+                      value: /^\d{1,3}$/,
+                      message: 'The age must be 2 or 3 digits.',
+                    },
+                  })}
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
                 />
-                {response.data.age && (
+                {errors.age && <h3 className="white">{errors.age.message}</h3>}
+                {/* {response.data.age && (
                   <h3 className="white">{response.data.age}</h3>
-                )}
+                )} */}
               </div>
               <br />
               <div className="form-outline fieldwidth">
@@ -205,13 +240,22 @@ function Profile(props) {
                   type="text"
                   className="form-control form-control-lg"
                   placeholder={userInformation.information.address}
-                  {...register('address', {})}
+                  {...register('address', {
+                    required: 'The Address field is required.',
+                    maxLength: {
+                      value: 150,
+                      message: 'Address should be within 150 character',
+                    },
+                  })}
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
-                {response.data.address && (
-                  <h3 className="white">{response.data.address}</h3>
+                {errors.address && (
+                  <h3 className="white">{errors.address.message}</h3>
                 )}
+                {/* {response.data.address && (
+                  <h3 className="white">{response.data.address}</h3>
+                )} */}
               </div>
               <br />
               {error && <h2 className="error-msg-color">{error}</h2>}
