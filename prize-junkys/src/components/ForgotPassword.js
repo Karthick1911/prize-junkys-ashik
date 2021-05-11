@@ -12,7 +12,7 @@ function ForgotPassword(props) {
 
   useEffect(() => {
     if (localStorage.getItem('user-info')) {
-      history.push('/SweepStake');
+      history.push('/sweepstake');
     }
   }, []);
 
@@ -26,7 +26,6 @@ function ForgotPassword(props) {
         console.log('response>>>', response);
         console.log('message>>>', response.data.message);
         if (response.data.message === 'We have emailed your password.') {
-          localStorage.setItem('user-info', JSON.stringify(response.data));
           console.log('message>>>', response.data.message);
           setEmail('');
           setMessage(response.data.message);

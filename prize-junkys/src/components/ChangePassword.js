@@ -22,13 +22,13 @@ function ChangePassword(props) {
   const changeOption = (changeParam) => {
     switch (changeParam) {
       case 'MySweepstake':
-        history.push('/MySweepstake');
+        history.push('/mysweepstake');
         break;
       case 'MyProfile':
-        history.push('/Profile');
+        history.push('/profile');
         break;
       case 'Logout':
-        history.push('/Logout');
+        history.push('/logout');
         break;
       default:
         break;
@@ -73,7 +73,7 @@ function ChangePassword(props) {
     <div>
       <div>
         <span>
-          <Link to="/Profile" className="left">
+          <Link to="/profile" className="left">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="40"

@@ -39,7 +39,7 @@ function SweepStake(props) {
   console.log('filtered post:', filteredItems);
 
   const handleView = (key) => {
-    const link = '/SweepstakeDetails/' + key;
+    const link = '/sweepstakedetails/' + key;
     console.log(link);
     history.push(link);
   };
@@ -48,13 +48,13 @@ function SweepStake(props) {
     console.log(changeParam);
     switch (changeParam) {
       case 'MySweepstake':
-        history.push('/MySweepstake');
+        history.push('/mysweepstake');
         break;
       case 'MyProfile':
-        history.push('/Profile');
+        history.push('/profile');
         break;
       case 'Logout':
-        history.push('/Logout');
+        history.push('/logout');
         break;
       default:
         break;
@@ -74,7 +74,7 @@ function SweepStake(props) {
     <div>
       <div>
         <span>
-          <Link to="/Logout" className="left">
+          <Link to="/logout" className="left">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="40"

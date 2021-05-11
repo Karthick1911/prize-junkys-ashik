@@ -7,7 +7,7 @@ function Logout(props) {
   };
 
   const cancel = () => {
-    history.push('/SweepStake');
+    history.push('/sweepstake');
   };
 
   const history = useHistory();

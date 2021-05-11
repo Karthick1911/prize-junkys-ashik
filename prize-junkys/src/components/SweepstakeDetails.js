@@ -30,19 +30,19 @@ function SweepstakeDetails(props) {
   }, []);
 
   const handleSubmit = () => {
-    history.push('/SweepstakeDetail/' + id);
+    history.push('/sweepstakedetail/' + id);
   };
 
   const changeOption = (changeParam) => {
     switch (changeParam) {
       case 'MySweepstake':
-        history.push('/MySweepstake');
+        history.push('/mysweepstake');
         break;
       case 'MyProfile':
-        history.push('/Profile');
+        history.push('/profile');
         break;
       case 'Logout':
-        history.push('/Logout');
+        history.push('/logout');
         break;
       default:
         break;
@@ -53,7 +53,7 @@ function SweepstakeDetails(props) {
     <div>
       <div>
         <span>
-          <Link to="/SweepStake" className="left">
+          <Link to="/sweepstake" className="left">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="40"

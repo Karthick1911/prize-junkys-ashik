@@ -18,7 +18,7 @@ function Register(props) {
 
   useEffect(() => {
     if (localStorage.getItem('user-info')) {
-      history.push('/SweepStake');
+      history.push('/sweepstake');
     }
   }, []);
 
@@ -39,7 +39,6 @@ function Register(props) {
         console.log(typeof response.data.errors);
         if (response.data.message === 'User registered successfully') {
           console.log(response.data.message);
-          localStorage.setItem('user-info', JSON.stringify(response.data));
           history.push('/');
         } else {
           console.log(response.data.message);

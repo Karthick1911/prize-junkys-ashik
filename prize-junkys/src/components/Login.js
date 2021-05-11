@@ -12,7 +12,7 @@ function Login(props) {
 
   useEffect(() => {
     if (localStorage.getItem('user-info')) {
-      history.push('/SweepStake');
+      history.push('/sweepstake');
     }
   }, []);
   const handleLogin = async () => {
@@ -28,9 +28,8 @@ function Login(props) {
         console.log('message>>>', response.data.message);
         if (response.data.message === 'User logged in successfully') {
           localStorage.setItem('user-info', JSON.stringify(response.data));
-          console.log('token value>>', response.data.data.access_token);
           localStorage.setItem('token', response.data.data.access_token);
-          history.push('/SweepStake');
+          history.push('/sweepstake');
         } else {
           setError(response.data.message);
         }
@@ -38,7 +37,7 @@ function Login(props) {
   };
 
   const handleResister = () => {
-    history.push('/Register');
+    history.push('/register');
   };
   return (
     <div>
@@ -103,7 +102,7 @@ function Login(props) {
       </button>
       <br />
       <br />
-      <Link className="wolor" to="/ForgotPassword">
+      <Link className="wolor" to="/forgotpassword">
         <div>Forgot Password?</div>
       </Link>
     </div>

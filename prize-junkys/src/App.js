@@ -15,53 +15,34 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      {/* <BrowserRouter>
-        <div>
-          <Switch>
-            <Route exact path="/" component={Login} />
-            <Route path="/SweepStake" component={SweepStake} />
-            <Route path="/Register" component={Register} />
-            <Route path="/Profile" component={Profile} />
-            <Route path="/ForgotPassword" component={ForgotPassword} />
-            <Route path="/ChangePassword" component={ChangePassword} />
-            <Route
-              path="/SweepstakeDetails/:id"
-              component={SweepstakeDetails}
-            />
-            <Route path="/MySweepstake" component={MySweepstake} />
-            <Route path="/Logout" component={Logout} />
-            <Route path="/SweepstakeDetail/:id" component={SweepstakeDetail} />
-          </Switch>
-        </div>
-      </BrowserRouter> */}
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route path="/Register" component={Register} />
-          <Route path="/ForgotPassword" component={ForgotPassword} />
+          <Route path="/register" component={Register} />
+          <Route path="/forgotpassword" component={ForgotPassword} />
 
-          <Route path="/SweepStake">
+          <Route path="/sweepstake">
             <Protected Component={SweepStake} />
           </Route>
 
-          <Route path="/Profile">
+          <Route path="/profile">
             <Protected Component={Profile} />
           </Route>
 
-          <Route path="/ChangePassword">
+          <Route path="/changepassword">
             <Protected Component={ChangePassword} />
           </Route>
-          <Route path="/SweepstakeDetails/:id">
+          <Route path="/sweepstakedetails/:id">
             <Protected Component={SweepstakeDetails} />
           </Route>
-          <Route path="/MySweepstake">
+          <Route path="/mysweepstake">
             <Protected Component={MySweepstake} />
           </Route>
-          <Route path="/SweepstakeDetail/:id">
-            <Route path="/SweepstakeDetail/:id" component={SweepstakeDetail} />
+          <Route path="/sweepstakedetail/:id">
+            <Protected Component={SweepstakeDetail} />
           </Route>
 
-          <Route path="/Logout">
+          <Route path="/logout">
             <Protected Component={Logout} />
           </Route>
         </Switch>
