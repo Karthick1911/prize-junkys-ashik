@@ -4,11 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import MoreOption from './MoreOption';
-//import MoreOption from './MoreOption';
+import * as ReactBootstrap from 'react-bootstrap';
+
 function SweepStake(props) {
   const [items, setItems] = useState({ data: [] });
   const [view, setView] = useState('grid');
   const [search, setSearch] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [filteredItems, setFilteredItems] = useState([]);
   const history = useHistory();
   useEffect(() => {
@@ -20,6 +22,7 @@ function SweepStake(props) {
         setItems({ data: arrayResult.data });
         console.log(arrayResult.data);
         console.log(typeof arrayResult.data);
+        setIsLoading(true);
       });
   }, []);
 
@@ -224,32 +227,37 @@ function SweepStake(props) {
           </div>
         )}
 
-        {view === 'grid' && search === '' && (
-          <div>
-            {items.data.length &&
-              items.data.map((item) => (
-                <span className=" gridinner">
-                  <span className=" gridproduct">
-                    <div key={item.id} className="image">
-                      <img src={item.image} height="100" width="100" />
-                    </div>
-                    <h4 className="desc" key={item.id}>
-                      {item.title}
-                    </h4>
-                    <br />
-                    <button
-                      key={item.id}
-                      className="view"
-                      onClick={() => {
-                        handleView(item.id);
-                      }}
-                    >
-                      view
-                    </button>
+        {isLoading ? (
+          view === 'grid' &&
+          search === '' && (
+            <div>
+              {items.data.length &&
+                items.data.map((item) => (
+                  <span className=" gridinner">
+                    <span className=" gridproduct">
+                      <div key={item.id} className="image">
+                        <img src={item.image} height="100" width="100" />
+                      </div>
+                      <h4 className="desc" key={item.id}>
+                        {item.title}
+                      </h4>
+                      <br />
+                      <button
+                        key={item.id}
+                        className="view"
+                        onClick={() => {
+                          handleView(item.id);
+                        }}
+                      >
+                        view
+                      </button>
+                    </span>
                   </span>
-                </span>
-              ))}
-          </div>
+                ))}
+            </div>
+          )
+        ) : (
+          <ReactBootstrap.Spinner animation="border" className="white" />
         )}
       </div>
     </div>

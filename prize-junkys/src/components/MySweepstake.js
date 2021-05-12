@@ -4,11 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import MoreOption from './MoreOption';
+import * as ReactBootstrap from 'react-bootstrap';
 
 function MySweepstake(props) {
   const [items, setItems] = useState({ data: [] });
   const user = localStorage.getItem('token');
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     axios
@@ -23,6 +25,7 @@ function MySweepstake(props) {
         setItems({ data: arrayResult });
         console.log(arrayResult.data);
         console.log(typeof arrayResult.data);
+        setIsLoading(true);
       });
   }, []);
 
@@ -69,28 +72,32 @@ function MySweepstake(props) {
         </span>
       </div>
       <div>
-        {items.data.length ? (
-          items.data.map((item) => (
-            <div className="middle">
-              <div className="productbg ">
-                <div key={item.id} className="image">
-                  <img src={item.image} height="150" width="150" />
+        {isLoading ? (
+          items.data.length ? (
+            items.data.map((item) => (
+              <div className="middle">
+                <div className="productbg ">
+                  <div key={item.id} className="image">
+                    <img src={item.image} height="150" width="150" />
+                  </div>
+                  <h4 className="desc" key={item.id}>
+                    {item.title}
+                  </h4>
+                  <br />
+                  <h5>Start date : {item.start_date}</h5>
+                  <h5>Etart date : {item.end_date}</h5>
+                  <h5>Odds : {item.ratio}</h5>
+                  <h5>
+                    Status :<span className="orange">{item.status_info}</span>
+                  </h5>
                 </div>
-                <h4 className="desc" key={item.id}>
-                  {item.title}
-                </h4>
-                <br />
-                <h5>Start date : {item.start_date}</h5>
-                <h5>Etart date : {item.end_date}</h5>
-                <h5>Odds : {item.ratio}</h5>
-                <h5>
-                  Status :<span className="orange">{item.status_info}</span>
-                </h5>
               </div>
-            </div>
-          ))
+            ))
+          ) : (
+            <h2 className="white">No SweepStake</h2>
+          )
         ) : (
-          <h2 className="white">No SweepStake</h2>
+          <ReactBootstrap.Spinner animation="border" className="white" />
         )}
       </div>
     </div>

@@ -14,7 +14,6 @@ function Profile(props) {
   const [age, setAge] = useState('');
   const [address, setAddress] = useState('');
   const [error, setError] = useState('');
-  const [response, setResponse] = useState({ data: {} });
   const [message, setMessage] = useState('');
   const [userInformation, setUserInformation] = useState({ information: {} });
   const history = useHistory();
@@ -65,9 +64,6 @@ function Profile(props) {
       .then((response) => {
         console.log('Update response : ', response.data.message);
         console.log('Update error response : ', response.data.errors);
-        if (response.data.message === 'The given data was invalid') {
-          setResponse({ data: response.data.errors });
-        }
         if (response.data.message === 'Your Profile Updated Successfully') {
           setMessage(response.data.message);
         }
@@ -162,9 +158,6 @@ function Profile(props) {
                 {errors.name && (
                   <h3 className="white">{errors.name.message}</h3>
                 )}
-                {/* {response.data.first_name && (
-                  <h3 className="white">{response.data.first_name}</h3>
-                )} */}
               </div>
               <br />
               <div className="form-outline fieldwidth">
@@ -185,9 +178,6 @@ function Profile(props) {
                 {errors.email && (
                   <h3 className="white">{errors.email.message}</h3>
                 )}
-                {/* {response.data.email && (
-                  <h3 className="white">{response.data.email}</h3>
-                )} */}
               </div>
               <br />
               <div className="form-outline fieldwidth">
@@ -209,9 +199,6 @@ function Profile(props) {
                 {errors.phoneNumber && (
                   <h3 className="white">{errors.phoneNumber.message}</h3>
                 )}
-                {/* {response.data.mobile_no && (
-                  <h3 className="white">{response.data.mobile_no}</h3>
-                )} */}
               </div>
               <br />
               <div className="form-outline fieldwidth">
@@ -230,9 +217,6 @@ function Profile(props) {
                   onChange={(e) => setAge(e.target.value)}
                 />
                 {errors.age && <h3 className="white">{errors.age.message}</h3>}
-                {/* {response.data.age && (
-                  <h3 className="white">{response.data.age}</h3>
-                )} */}
               </div>
               <br />
               <div className="form-outline fieldwidth">
@@ -253,9 +237,6 @@ function Profile(props) {
                 {errors.address && (
                   <h3 className="white">{errors.address.message}</h3>
                 )}
-                {/* {response.data.address && (
-                  <h3 className="white">{response.data.address}</h3>
-                )} */}
               </div>
               <br />
               {error && <h2 className="error-msg-color">{error}</h2>}
