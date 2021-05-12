@@ -12,6 +12,7 @@ function SweepStake(props) {
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [filteredItems, setFilteredItems] = useState([]);
+  const [sortItems, setSortItems] = useState([]);
   const history = useHistory();
   useEffect(() => {
     axios
@@ -27,18 +28,33 @@ function SweepStake(props) {
   }, []);
 
   useEffect(() => {
+    setSortItems(
+      items.data.sort((a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+          return -1;
+        }
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      })
+    );
+  }, [items.data]);
+
+  useEffect(() => {
     setFilteredItems(
-      items.data.filter((post) => {
-        console.log('post title:', post.title);
-        const title = post.title.toLowerCase();
+      sortItems.filter((item) => {
+        console.log('item title:', item.title);
+        const title = item.title.toLowerCase();
         if (search) {
           return title.includes(search.toLowerCase());
         }
       })
     );
-  }, [search, items.data]);
+  }, [search, sortItems]);
 
-  console.log('normal post', items.data);
+  console.log('normal Items:', items.data);
+  console.log('sorted Items:', sortItems);
   console.log('filtered post:', filteredItems);
 
   const handleView = (key) => {
