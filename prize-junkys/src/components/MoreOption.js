@@ -51,7 +51,7 @@ function MoreOption(props) {
               </ul>
             </li>
           </ul>
-        </nav>{' '}
+        </nav>
       </div>
     </div>
   );

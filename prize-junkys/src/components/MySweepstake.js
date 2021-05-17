@@ -19,12 +19,10 @@ function MySweepstake(props) {
       })
 
       .then((res) => {
-        console.log('subscription', res);
-        let result = JSON.stringify(res.data.stakes);
-        let arrayResult = JSON.parse(result);
+        console.log('subscriptions:', res);
+        let arrayResult = res.data.stakes;
         setItems({ data: arrayResult });
         console.log(arrayResult.data);
-        console.log(typeof arrayResult.data);
         setIsLoading(true);
       });
   }, []);

@@ -19,7 +19,6 @@ function SweepstakeDetails(props) {
   console.log('id from sweep', id);
 
   const mutation = useMutation(async (id) => {
-    console.log('PARAM ID', id);
     await axios
       .post(
         'http://80.211.233.121/prize_junkys/api/stakeform/store',

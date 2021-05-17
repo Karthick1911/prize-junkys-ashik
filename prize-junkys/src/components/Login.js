@@ -73,7 +73,8 @@ function Login(props) {
             {...register('email', {
               required: 'The email field is required.',
               pattern: {
-                value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                value:
+                  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
                 message: 'Email format is invalid',
               },
             })}

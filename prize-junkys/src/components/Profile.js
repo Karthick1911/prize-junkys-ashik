@@ -26,14 +26,11 @@ function Profile(props) {
   } = useForm();
 
   const mutation = useMutation(async (user) => {
-    console.log('Token in useMutation :', user);
     await axios
       .post('http://80.211.233.121/prize_junkys/api/auth/me', [], {
         headers: { Authorization: 'Bearer' + user },
       })
       .then((res) => {
-        console.log('Token in then :', user);
-        console.log('Try Profile message :', res);
         console.log('resp data: ', res.data.data.email);
         if (res.data.message === 'User profile detail.') {
           setUserInformation({ information: res.data.data });
@@ -41,7 +38,6 @@ function Profile(props) {
       });
   });
   const mute = (user) => {
-    console.log('Token in mute:', user);
     mutation.mutate(user);
   };
   useEffect(() => {
@@ -74,7 +70,6 @@ function Profile(props) {
   };
 
   const changeOption = (changeParam) => {
-    console.log(changeParam);
     switch (changeParam) {
       case 'MySweepstake':
         history.push('/mysweepstake');
@@ -168,7 +163,8 @@ function Profile(props) {
                   {...register('email', {
                     required: 'The Email field is required.',
                     pattern: {
-                      value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                      value:
+                        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
                       message: 'Email format is invalid',
                     },
                   })}
@@ -246,7 +242,7 @@ function Profile(props) {
                   className="btn-col"
                   value="Update Profile"
                 />
-              </div>{' '}
+              </div>
               <br />
             </div>
           </form>

@@ -133,7 +133,8 @@ function ChangePassword(props) {
                 {...register('newPassword', {
                   required: 'The New Password field is required.',
                   pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                    value:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
                     message:
                       'Password should contain Uppercase, Lowercase,Special character and Numeric.',
                   },
@@ -159,13 +160,15 @@ function ChangePassword(props) {
                 {...register('confirmPassword', {
                   required: 'The Confirm Password field is required.',
                   pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                    value:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
                     message:
                       'Confirm Password should contain Uppercase, Lowercase,Special character and Numeric.',
                   },
                   minLength: {
                     value: 6,
-                    message: 'The new password must be at least 6 characters.',
+                    message:
+                      'The confirm new password must be at least 6 characters.',
                   },
                 })}
                 value={confirmPassword}
